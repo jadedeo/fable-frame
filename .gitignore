@@ -1,0 +1,39 @@
+# === Node ===
+node_modules/
+dist/
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Build output ===
+frontend/dist/
+frontend/.vite/
+backend/.next/
+*.tsbuildinfo
+
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+
+# === VSCode ===
+.vscode/
+
+# === Environment ===
+.env.local
+.env.development
+.env.production
+
+# === Logs ===
+logs
+*.log
+backend/logs/
+frontend/logs/
+
+# === Optional ===
+coverage/
+.cache/
