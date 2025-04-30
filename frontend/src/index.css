@@ -1,0 +1,54 @@
+@import "@mantine/core/styles.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Questrial&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html,
+    p,
+    small,
+    span,
+    label,
+    textarea,
+    input {
+        font-family: "Questrial", sans-serif !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Questrial", sans-serif !important;
+    }
+}
+
+@layer components {
+    /* .nav-link {
+        @apply w-8 h-8 rounded-md grid place-items-center;
+    } */
+
+    .card {
+        @apply bg-white px-5 py-5  shadow-lg;
+    }
+
+    /* .title {
+        @apply font-bold mb-6 text-2xl;
+    }
+
+    .input {
+        @apply block rounded-md p-2 placeholder:text-sm border-0 outline-0 ring-1 ring-neutral-500 focus:ring-2 mb-4;
+    }
+
+    .btn {
+        @apply block w-full bg-neutral-500 text-white rounded-md p-2 active:bg-neutral-600;
+    } */
+}
+
+.vertical-timeline-element-content {
+    border-radius: 0;
+}

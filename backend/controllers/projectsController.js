@@ -50,13 +50,13 @@ const getProject = async (req, res) => {
 /** ADD PROJECT */
 const addProject = async (req, res) => {
     // grab data from request body
-    const { name } = req.body;
+    const { projectData } = req.body;
 
     // res.json(req.user);
 
     // validation: check fields are not empty
-    if (!name) {
-        return res.status(400).json({ error: "All fields are required" });
+    if (!projectData.name) {
+        return res.status(400).json({ error: "Project name is required" });
     }
 
     // grab authenticated user from request body
@@ -65,8 +65,7 @@ const addProject = async (req, res) => {
     try {
         const project = await Project.create({
             user: user._id,
-            name,
-            characters: [],
+            ...projectData,
         });
         res.status(200).json({ success: "Project created", project });
     } catch (error) {
@@ -76,12 +75,15 @@ const addProject = async (req, res) => {
 
 /** UPDATE PROJECT */
 const updateProject = async (req, res) => {
+    console.log(req.body);
+    console.log(req.params);
     // grab data from request body
-    const { name } = req.body;
+    const { projectData } = req.body;
+    const { name, description } = projectData;
 
     // validation: check fields are not empty
-    if (!name) {
-        return res.status(400).json({ error: "All fields are required" });
+    if (!projectData.name) {
+        return res.status(400).json({ error: "Project name is required" });
     }
 
     // check id is valid type

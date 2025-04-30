@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
+import logo from "../assets/fableframelogo.png"; // Adjust path as needed
+
 const SideNav = () => {
     const { user, setUser } = useContext(UserContext);
 
@@ -18,19 +20,22 @@ const SideNav = () => {
         }
     };
     return (
-        <section className="px-6 py-8 h-full flex flex-col justify-between">
+        <section className="px-2 py-0 h-full flex flex-col justify-between bg-white">
             <div className="flex flex-col gap-5">
                 <div
                     className="flex gap-3 items-center cursor-pointer"
                     onClick={() => navigate("/")}
                 >
-                    <div className="w-10 h-10 bg-gray-500"></div>
-                    <h1>fableframe</h1>
+                    {/* <div className="w-full h-20 bg-neutral-500"></div> */}
+                    <img src={logo} className="absolute top-[25px] h-[150px]" />
                 </div>
 
-                <small>more side bar content here</small>
+                <div className="mt-[125px] px-2 text-center">
+                    <hr></hr>
+                    <small>more side bar content here</small>
+                </div>
             </div>
-            <div>
+            <div className="mb-4 px-2 text-center">
                 <button onClick={handleLogout} className="cursor-pointer">
                     <small>LOGOUT</small>
                 </button>

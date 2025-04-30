@@ -72,7 +72,9 @@ const MultiSelectCreatable = ({
             >
                 <Group gap="sm" justify="space-between">
                     <span
-                        className={value.includes(item) ? "text-gray-400" : ""}
+                        className={
+                            value.includes(item) ? "text-neutral-400" : ""
+                        }
                     >
                         {item}
                     </span>

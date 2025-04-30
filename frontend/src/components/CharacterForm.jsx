@@ -156,7 +156,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
 
             <h4 className="font-bold text-2xl">
                 {isEditing
-                    ? `editing ${character.name}'s character profile`
+                    ? `Editing ${character.name}'s Character Profile`
                     : ""}
             </h4>
 
@@ -171,6 +171,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                             name: e.currentTarget.value,
                         })
                     }
+                    required
                 />
 
                 <MultiSelectCreatable
@@ -244,6 +245,8 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                             description: e.currentTarget.value,
                         })
                     }
+                    autosize
+                    minRows={"5"}
                 />
             </section>
 

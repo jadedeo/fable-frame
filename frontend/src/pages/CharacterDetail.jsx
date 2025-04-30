@@ -6,7 +6,9 @@ import {
     deleteCharacter,
 } from "../controllers/charactersController";
 import CharacterForm from "../components/CharacterForm";
-import { Modal, Button } from "@mantine/core";
+import { Modal, Button, Pill, Badge } from "@mantine/core";
+import RelationshipItem from "../components/RelationshipItem";
+import BiographyTimeline from "../components/BiographyTimeline";
 
 const CharacterDetail = () => {
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ const CharacterDetail = () => {
     //loading state
     const [loading, setLoading] = useState(true);
 
-    const [isEditing, setIsEditing] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const fetchCharacterData = async () => {
@@ -50,26 +52,30 @@ const CharacterDetail = () => {
     }, [characterId]);
 
     return (
-        <div className="h-full">
-            <Heading title={character.name} />
+        <div className="h-full overflow-scroll relative">
+            {!isEditing && (
+                <div className="flex gap-3 fixed bottom-5 right-5 items-center z-auto">
+                    <div
+                        className="cursor-pointer bg-neutral-400 rounded-full w-10 h-10 flex items-center justify-center"
+                        onClick={() => setDeleteModalOpen(true)}
+                    >
+                        <i className="fa-solid fa-trash-can text-white"></i>
+                    </div>
+                    <div
+                        className=" cursor-pointer bg-neutral-800 rounded-full w-15 h-15 flex items-center justify-center"
+                        onClick={() => setIsEditing(true)}
+                    >
+                        <i className="fa-solid fa-pencil text-white text-2xl"></i>
+                    </div>
+                </div>
+            )}
 
-            <div className="mt-10 flex flex-col gap-10">
+            {/* <p>isEditing: {isEditing ? "true" : "false"}</p> */}
+
+            <div className="flex flex-col gap-10 ">
                 {loading && (
                     <div className="w-full flex items-center justify-center">
                         <i className="fa-solid fa-spinner animate-spin text-3xl text-center block"></i>
-                    </div>
-                )}
-
-                {!isEditing && (
-                    <div className="flex gap-3">
-                        <i
-                            className="fa-solid fa-pencil cursor-pointer"
-                            onClick={() => setIsEditing(true)}
-                        ></i>
-                        <i
-                            className="fa-solid fa-trash-can"
-                            onClick={() => setDeleteModalOpen(true)}
-                        ></i>
                     </div>
                 )}
 
@@ -81,6 +87,161 @@ const CharacterDetail = () => {
                     />
                 )}
             </div>
+
+            {/* VIEWING ONLY */}
+            {!isEditing && (
+                <>
+                    <div className="flex gap-10 pb-5 px-5">
+                        <section className="flex flex-col gap-5 card">
+                            <h1 className="font-bold text-4xl">
+                                {character.name}
+                            </h1>
+                            <p className="">{character.description}</p>
+
+                            {/* <hr></hr> */}
+
+                            <section className="grid grid-cols-[1fr,2fr] gap-x-5 gap-y-3">
+                                <div>
+                                    <h6 className="text-neutral-400">
+                                        ALIASES
+                                    </h6>
+                                    <div className="flex gap-1">
+                                        {character.aliases?.map(
+                                            (alias, index) => {
+                                                return (
+                                                    <Badge
+                                                        key={index}
+                                                        color="neutral"
+                                                    >
+                                                        {alias}
+                                                    </Badge>
+                                                );
+                                            }
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h6 className="text-neutral-400">ROLE</h6>
+                                    <div className="flex gap-1">
+                                        {character.role?.map((role, index) => {
+                                            return (
+                                                <Badge
+                                                    key={index}
+                                                    color="neutral"
+                                                >
+                                                    {role}
+                                                </Badge>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h6 className="text-neutral-400">STATUS</h6>
+                                    <Badge color="neutral">
+                                        {character.status}
+                                    </Badge>
+                                </div>
+
+                                <div>
+                                    <h6 className="text-neutral-400">GOAL</h6>
+                                    <p>{character.goal}</p>
+                                </div>
+                            </section>
+                        </section>
+                        <section className="w-full flex flex-col gap-5">
+                            <div className="h-full w-[300px] bg-black"></div>
+                        </section>
+                    </div>
+
+                    <div className="grid grid-cols-[1fr,1fr]">
+                        <section className="p-5 flex flex-col gap-3">
+                            <h6 className="text-neutral-400">
+                                PHYSICAL ATTRIBUTES & EXPRESSION
+                            </h6>
+
+                            <div className="card w-full grid grid-cols-2 gap-3">
+                                <p className="font-bold">Eye Color</p>
+                                <div
+                                    className="w-full h-5"
+                                    style={{
+                                        backgroundColor:
+                                            character.physicalDescription
+                                                ?.eyeColor,
+                                    }}
+                                ></div>
+
+                                <p className="font-bold">Hair Color</p>
+                                <div
+                                    className="w-full h-5"
+                                    style={{
+                                        backgroundColor:
+                                            character.physicalDescription
+                                                ?.hairColor,
+                                    }}
+                                ></div>
+
+                                <p className="font-bold">Height</p>
+                                <p>{character.physicalDescription?.height}</p>
+
+                                <p className="font-bold">Gender</p>
+                                <p>{character.physicalDescription?.gender}</p>
+                            </div>
+                        </section>
+                        <div className="flex flex-col gap-3 p-5">
+                            <section className=" flex flex-col gap-3">
+                                <h6 className="text-neutral-400">
+                                    PERSONALITY
+                                </h6>
+
+                                <div className="card flex flex-wrap gap-1">
+                                    {character.personality?.map(
+                                        (alias, index) => {
+                                            return (
+                                                <Badge
+                                                    key={index}
+                                                    color="neutral"
+                                                >
+                                                    {alias}
+                                                </Badge>
+                                            );
+                                        }
+                                    )}
+                                </div>
+                            </section>
+
+                            <section className="flex flex-col gap-3">
+                                <h6 className="text-neutral-400">
+                                    HABITS & MANNERISMS
+                                </h6>
+                                <div className="card flex flex-wrap gap-1">
+                                    <p>{character.habitsMannerisms}</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <section className="p-5">
+                        <h2 className="text-neutral-400">BIOGRAPHY</h2>
+
+                        <BiographyTimeline biography={character.biography} />
+                    </section>
+
+                    <section className="p-5 flex flex-col gap-3">
+                        <h2 className=" text-neutral-400">RELATIONSHIPS</h2>
+                        {character.relationships?.map((relationship, index) => {
+                            return (
+                                <RelationshipItem
+                                    key={index}
+                                    relationship={relationship}
+                                    editable={false}
+                                />
+                            );
+                        })}
+                    </section>
+                </>
+            )}
 
             <Modal
                 opened={deleteModalOpen}

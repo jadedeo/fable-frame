@@ -22,63 +22,17 @@ const Layout = () => {
     //     }
     // };
 
+    //bg-[url(gradientBg.jpg)] bg-no-repeat bg-cover
     return (
-        <div>
+        <div className="p-10 bg-neutral-100 h-screen w-screen ">
             {/* IF USER LOGGED IN */}
             {user.email ? (
-                <div className="flex h-screen w-screen">
-                    <header className="bg-white w-[20%] min-w-[200px] h-screen">
+                <div className="flex gap-8 h-full">
+                    <header className="bg-white w-[10%] min-w-[100px] h-full">
                         <SideNav />
-                        {/* <div className="h-full max-w-10% bg-amber-200">
-                    <Link
-                        title="Home"
-                        to="/"
-                        className="fa-solid fa-house nav-link"
-                    ></Link>
-
-                    {user.email ? (
-                        <Home />
-                    ) : (
-                        <div className="flex items-center gap-2">
-                            <Link
-                                title="Create Post"
-                                to="/create"
-                                className="fa-solid fa-circle-plus nav-link"
-                            ></Link>
-
-                            <Link
-                                title="Dashboard"
-                                to="/dashboard"
-                                className="fa-solid fa-circle-user nav-link"
-                            ></Link>
-                            <button
-                                title="Log Out"
-                                onClick={handleLogout}
-                                className=" nav-link"
-                            >
-                                logout
-                            </button>
-                        </div>
-                        <AuthPage />
-                        <div className="flex items-center gap-2">
-                            <Link
-                                title="Login"
-                                to="/login"
-                                className="nav-link"
-                            >
-                                login
-                            </Link>
-                            <Link
-                                title="Register"
-                                to="/register"
-                                className="fa-solid fa-user-plus nav-link"
-                            ></Link>
-                        </div>
-                    )}
-                </div> */}
                     </header>
 
-                    <main className="w-full bg-gray-100 overflow-scroll">
+                    <main className="w-full  ">
                         <Outlet />
                     </main>
                 </div>

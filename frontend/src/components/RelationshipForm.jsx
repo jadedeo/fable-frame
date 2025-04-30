@@ -28,7 +28,6 @@ const RelationshipForm = ({
         let updatedRelationship;
 
         if (initialData) {
-            // Edit mode: replace matching item by id
             updatedRelationship = characterData.relationships.map(
                 (relationship) =>
                     relationship.id === initialData.id
@@ -69,6 +68,8 @@ const RelationshipForm = ({
             <MultiSelectCreatable
                 defaultVals={[
                     "Friend",
+                    "Acquaintance",
+                    "Rival",
                     "Partner",
                     "Spouse",
                     "Significant Other",
