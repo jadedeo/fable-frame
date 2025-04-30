@@ -59,7 +59,7 @@ const createCharacter = async (projectId, characterData) => {
 
 /** Update character */
 const updateCharacter = async (projectId, characterData) => {
-    console.log("HERE", characterData);
+    // console.log("HERE", characterData);
     if (!characterData.name) {
         throw Error("Character name is required");
     }
@@ -84,4 +84,30 @@ const updateCharacter = async (projectId, characterData) => {
     return data;
 };
 
-export { getProjectCharacters, getCharacter, createCharacter, updateCharacter };
+/** Delete character */
+const deleteCharacter = async (projectId, characterId) => {
+    const res = await fetch(
+        `/api/projects/${projectId}/characters/${characterId}`,
+        {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        throw Error(data.error);
+    }
+    return data;
+};
+
+export {
+    getProjectCharacters,
+    getCharacter,
+    createCharacter,
+    updateCharacter,
+    deleteCharacter,
+};

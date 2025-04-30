@@ -1,17 +1,24 @@
 import Heading from "../components/Heading";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getCharacter } from "../controllers/charactersController";
+import {
+    getCharacter,
+    deleteCharacter,
+} from "../controllers/charactersController";
 import CharacterForm from "../components/CharacterForm";
+import { Modal, Button } from "@mantine/core";
 
 const CharacterDetail = () => {
+    const navigate = useNavigate();
+
     const { projectId } = useParams();
     const { characterId } = useParams();
     const [character, setCharacter] = useState([]);
     //loading state
     const [loading, setLoading] = useState(true);
 
-    const [operation, setOperation] = useState(null);
+    const [isEditing, setIsEditing] = useState(null);
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
     const fetchCharacterData = async () => {
         try {
@@ -23,14 +30,25 @@ const CharacterDetail = () => {
             console.error(error);
         }
     };
+
+    const handleDeleteCharacter = async () => {
+        try {
+            await deleteCharacter(projectId, characterId);
+            navigate(`/projects/${projectId}`);
+        } catch (error) {
+            console.error("Error deleting character:", error);
+        }
+    };
+
     const handleDoneEditing = () => {
-        setOperation(null);
+        setIsEditing(false);
         fetchCharacterData();
     };
 
     useEffect(() => {
         fetchCharacterData();
     }, [characterId]);
+
     return (
         <div className="h-full">
             <Heading title={character.name} />
@@ -42,27 +60,46 @@ const CharacterDetail = () => {
                     </div>
                 )}
 
-                {!operation && (
+                {!isEditing && (
                     <div className="flex gap-3">
                         <i
                             className="fa-solid fa-pencil cursor-pointer"
-                            onClick={() => setOperation("editing")}
+                            onClick={() => setIsEditing(true)}
                         ></i>
                         <i
                             className="fa-solid fa-trash-can"
-                            onClick={() => setOperation("delete")}
+                            onClick={() => setDeleteModalOpen(true)}
                         ></i>
                     </div>
                 )}
 
-                {operation == "editing" && (
+                {isEditing && (
                     <CharacterForm
                         character={character}
-                        operation={operation}
+                        isEditing={isEditing}
                         onDoneEditing={handleDoneEditing}
                     />
                 )}
             </div>
+
+            <Modal
+                opened={deleteModalOpen}
+                onClose={() => setDeleteModalOpen(false)}
+                title="Confirm Deletion"
+                centered
+            >
+                <p>Are you sure you want to delete this character?</p>
+
+                <div className="flex justify-end gap-3 mt-5">
+                    <Button
+                        variant="outline"
+                        onClick={() => setDeleteModalOpen(false)}
+                    >
+                        Cancel
+                    </Button>
+                    <Button onClick={handleDeleteCharacter}>Delete</Button>
+                </div>
+            </Modal>
         </div>
     );
 };

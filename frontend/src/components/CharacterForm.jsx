@@ -20,7 +20,7 @@ import {
 } from "../controllers/charactersController";
 import { useParams, useNavigate } from "react-router-dom";
 
-const CharacterForm = ({ character, operation, onDoneEditing }) => {
+const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
     useEffect(() => {
         // console.log(character);
         if (character) {
@@ -79,7 +79,7 @@ const CharacterForm = ({ character, operation, onDoneEditing }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(characterData, projectId);
-        if (operation == "editing") {
+        if (isEditing) {
             console.log("SAVE EDIT");
             try {
                 const data = await updateCharacter(
@@ -155,7 +155,7 @@ const CharacterForm = ({ character, operation, onDoneEditing }) => {
             </Modal>
 
             <h4 className="font-bold text-2xl">
-                {operation == "editing"
+                {isEditing
                     ? `editing ${character.name}'s character profile`
                     : ""}
             </h4>
@@ -459,7 +459,7 @@ const CharacterForm = ({ character, operation, onDoneEditing }) => {
 
             <div className="flex gap-5 justify-end">
                 <Button type="submit">
-                    {operation == "editing" ? "save changes" : "create"}
+                    {isEditing ? "save changes" : "create"}
                 </Button>
                 <Button variant="outline" onClick={() => onDoneEditing()}>
                     cancel
