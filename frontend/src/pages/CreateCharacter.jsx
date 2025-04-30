@@ -12,10 +12,7 @@ const CreateCharacter = () => {
     };
     return (
         <div className="h-full">
-            <Heading
-                title={"Create New Character Profile"}
-                subtitle={"[subtitle here]"}
-            />
+            <Heading title={"Create New Character Profile"} />
             <CharacterForm onDoneEditing={onDoneEditing} />
         </div>
     );

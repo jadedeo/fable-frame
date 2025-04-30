@@ -111,7 +111,7 @@ const CharacterDetail = () => {
                                                 return (
                                                     <Badge
                                                         key={index}
-                                                        color="neutral"
+                                                        color="gray"
                                                     >
                                                         {alias}
                                                     </Badge>
@@ -126,10 +126,7 @@ const CharacterDetail = () => {
                                     <div className="flex gap-1">
                                         {character.role?.map((role, index) => {
                                             return (
-                                                <Badge
-                                                    key={index}
-                                                    color="neutral"
-                                                >
+                                                <Badge key={index} color="gray">
                                                     {role}
                                                 </Badge>
                                             );
@@ -139,7 +136,7 @@ const CharacterDetail = () => {
 
                                 <div>
                                     <h6 className="text-neutral-400">STATUS</h6>
-                                    <Badge color="neutral">
+                                    <Badge color="gray">
                                         {character.status}
                                     </Badge>
                                 </div>
@@ -199,10 +196,7 @@ const CharacterDetail = () => {
                                     {character.personality?.map(
                                         (alias, index) => {
                                             return (
-                                                <Badge
-                                                    key={index}
-                                                    color="neutral"
-                                                >
+                                                <Badge key={index} color="gray">
                                                     {alias}
                                                 </Badge>
                                             );

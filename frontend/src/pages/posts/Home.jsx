@@ -85,7 +85,7 @@ const Home = () => {
                 )}
 
                 {projects && (
-                    <section className="grid grid-cols-2 gap-5">
+                    <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         {projects.map((project) => (
                             <Link
                                 key={project._id}
@@ -95,7 +95,7 @@ const Home = () => {
                             </Link>
                         ))}
                         <div
-                            className="card w-[20%] flex items-center justify-center text-2xl justify-self-start cursor-pointer"
+                            className="card w-full h-[50%] md:h-full md:w-[20%] flex items-center justify-center text-2xl justify-self-start cursor-pointer"
                             onClick={() => {
                                 setOpen(true);
                             }}

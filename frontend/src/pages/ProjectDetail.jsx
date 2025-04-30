@@ -112,7 +112,7 @@ const ProjectDetail = () => {
                 )}
             </Modal>
 
-            <Heading title={project.name} subtitle={"[subtitle here]"} />
+            <Heading title={project.name} />
 
             <div className="mt-10 flex flex-col gap-10">
                 <section className="mx-5 flex flex-col gap-5">

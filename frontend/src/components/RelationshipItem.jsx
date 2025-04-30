@@ -21,11 +21,7 @@ const RelationshipItem = ({
                         <div className="flex gap-1">
                             {relationship.type.map((type, index) => {
                                 return (
-                                    <Badge
-                                        key={index}
-                                        size="sm"
-                                        color="neutral"
-                                    >
+                                    <Badge key={index} size="sm" color="gray">
                                         {type}
                                     </Badge>
                                 );

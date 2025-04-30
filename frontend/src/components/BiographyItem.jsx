@@ -13,11 +13,7 @@ const BiographyItem = ({ event, onEdit, onDelete }) => {
                         <div className="flex gap-1">
                             {event.tags.map((tag, index) => {
                                 return (
-                                    <Badge
-                                        key={index}
-                                        size="sm"
-                                        color="neutral"
-                                    >
+                                    <Badge key={index} size="sm" color="gray">
                                         {tag}
                                     </Badge>
                                 );

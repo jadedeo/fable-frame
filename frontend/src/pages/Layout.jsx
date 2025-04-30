@@ -28,11 +28,11 @@ const Layout = () => {
             {/* IF USER LOGGED IN */}
             {user.email ? (
                 <div className="flex gap-8 h-full">
-                    <header className="bg-white w-[10%] min-w-[100px] h-full">
+                    <header className="bg-white w-[150px] h-full">
                         <SideNav />
                     </header>
 
-                    <main className="w-full  ">
+                    <main className="w-full ">
                         <Outlet />
                     </main>
                 </div>

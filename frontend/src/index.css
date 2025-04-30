@@ -13,7 +13,8 @@
     span,
     label,
     textarea,
-    input {
+    input,
+    a {
         font-family: "Questrial", sans-serif !important;
     }
 
