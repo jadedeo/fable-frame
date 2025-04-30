@@ -13,18 +13,22 @@ const CharacterDetail = () => {
 
     const [operation, setOperation] = useState(null);
 
-    useEffect(() => {
-        const fetchCharacterData = async () => {
-            try {
-                const data = await getCharacter(projectId, characterId);
-                console.log("char data", data.character);
-                setCharacter(data.character);
-                setLoading(false);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+    const fetchCharacterData = async () => {
+        try {
+            const data = await getCharacter(projectId, characterId);
+            console.log("char data", data.character);
+            setCharacter(data.character);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const handleDoneEditing = () => {
+        setOperation(null);
+        fetchCharacterData();
+    };
 
+    useEffect(() => {
         fetchCharacterData();
     }, [characterId]);
     return (
@@ -38,18 +42,24 @@ const CharacterDetail = () => {
                     </div>
                 )}
 
-                <div className="flex gap-3">
-                    <button
-                        className="fa-solid fa-pencil cursor-pointer"
-                        onClick={() => setOperation("editing")}
-                    ></button>
-                    <i className="fa-solid fa-trash-can"></i>
-                </div>
+                {!operation && (
+                    <div className="flex gap-3">
+                        <i
+                            className="fa-solid fa-pencil cursor-pointer"
+                            onClick={() => setOperation("editing")}
+                        ></i>
+                        <i
+                            className="fa-solid fa-trash-can"
+                            onClick={() => setOperation("delete")}
+                        ></i>
+                    </div>
+                )}
 
-                {operation && (
+                {operation == "editing" && (
                     <CharacterForm
                         character={character}
                         operation={operation}
+                        onDoneEditing={handleDoneEditing}
                     />
                 )}
             </div>

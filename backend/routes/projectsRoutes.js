@@ -1,6 +1,7 @@
 import express from "express";
 import {
     getUserProjects,
+    getProject,
     addProject,
     updateProject,
     deleteProject,
@@ -21,6 +22,9 @@ const router = express.Router();
 /*************************************** GENERAL PROJECT ROUTES */
 // get user projects route
 router.get("/", auth, getUserProjects);
+
+// get project
+router.get("/:projectId", auth, getProject);
 
 // add project
 router.post("/", auth, addProject);

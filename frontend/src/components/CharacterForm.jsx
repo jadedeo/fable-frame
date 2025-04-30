@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MultiSelectCreatable from "./MultiSelectCreatable";
 import {
     TextInput,
@@ -14,10 +14,19 @@ import RelationshipForm from "./RelationshipForm";
 import RelationshipItem from "./RelationshipItem";
 import BiographyItem from "./BiographyItem";
 import BiographyForm from "./BiographyForm";
-import { createCharacter } from "../controllers/charactersController";
+import {
+    createCharacter,
+    updateCharacter,
+} from "../controllers/charactersController";
 import { useParams, useNavigate } from "react-router-dom";
 
-const CharacterForm = ({ character, operation }) => {
+const CharacterForm = ({ character, operation, onDoneEditing }) => {
+    useEffect(() => {
+        // console.log(character);
+        if (character) {
+            setCharacterData(character);
+        }
+    }, [character]);
     // use navigate hoook
     const navigate = useNavigate();
     //error state
@@ -27,11 +36,16 @@ const CharacterForm = ({ character, operation }) => {
         name: "", // ✓
         description: "", // ✓
         aliases: [], // ✓
-        age: null, // ✓
         status: "", // ✓
         role: [], // ✓
         goal: "", // ✓
-        physicalDescription: [], // ✓
+        physicalDescription: {
+            age: null,
+            gender: "",
+            eyeColor: "",
+            hairColor: "",
+            height: "",
+        }, // ✓
         personality: [], // ✓
         habitsMannerisms: "", // ✓
         skills: [], // ✓
@@ -65,13 +79,37 @@ const CharacterForm = ({ character, operation }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(characterData, projectId);
-        try {
-            const data = await createCharacter(projectId, characterData);
-            console.log("character created", data.character._id);
+        if (operation == "editing") {
+            console.log("SAVE EDIT");
+            try {
+                const data = await updateCharacter(
+                    projectId,
+                    // characterData._id,
+                    characterData
+                );
+                console.log("character updated", data);
+                console.log(
+                    `/projects/${projectId}/characters/${data.character._id}`
+                );
+                if (onDoneEditing) onDoneEditing();
+                // navigate(`/projects/${projectId}/characters/${data.character._id}`, {
+                //     replace: true,
+                // });
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            console.log("NEW");
+            try {
+                const data = await createCharacter(projectId, characterData);
+                console.log("character created", data.character._id);
 
-            navigate(`/projects/${projectId}/characters/${data.character._id}`);
-        } catch (error) {
-            console.error(error);
+                navigate(
+                    `/projects/${projectId}/characters/${data.character._id}`
+                );
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
@@ -121,86 +159,6 @@ const CharacterForm = ({ character, operation }) => {
                     ? `editing ${character.name}'s character profile`
                     : ""}
             </h4>
-
-            <section className="card w-full flex flex-col gap-5">
-                <div className="flex justify-between">
-                    <label
-                        style={{
-                            fontSize: "var(--mantine-font-size-sm)",
-                            fontWeight: "500",
-                        }}
-                    >
-                        Biography
-                    </label>
-                    <i
-                        className="fa-solid fa-plus cursor-pointer"
-                        onClick={() => {
-                            setModalType("biography");
-                            setOpen(true);
-                        }}
-                    ></i>
-                </div>
-                {characterData.biography?.length > 0 && (
-                    <div>
-                        {characterData.biography.map((event, index) => {
-                            return (
-                                <BiographyItem
-                                    key={event.id}
-                                    event={event}
-                                    onEdit={() => {
-                                        setEditingItem(event);
-                                        setModalType("biography");
-                                        setOpen(true);
-                                    }}
-                                    onDelete={() =>
-                                        handleDelete("biography", event.id)
-                                    }
-                                />
-                            );
-                        })}
-                    </div>
-                )}
-            </section>
-
-            <section className="card w-full flex flex-col gap-5">
-                <div className="flex justify-between">
-                    <label
-                        style={{
-                            fontSize: "var(--mantine-font-size-sm)",
-                            fontWeight: "500",
-                        }}
-                    >
-                        Relationships
-                    </label>
-                    <i
-                        className="fa-solid fa-plus cursor-pointer"
-                        onClick={() => {
-                            setModalType("relationship");
-                            setOpen(true);
-                        }}
-                    ></i>
-                </div>
-                {characterData.relationships?.length > 0 &&
-                    characterData.relationships.map((relationship, index) => {
-                        return (
-                            <RelationshipItem
-                                key={index}
-                                relationship={relationship}
-                                onEdit={() => {
-                                    setEditingItem(relationship);
-                                    setModalType("relationship");
-                                    setOpen(true);
-                                }}
-                                onDelete={() =>
-                                    handleDelete(
-                                        "relationship",
-                                        relationship.id
-                                    )
-                                }
-                            />
-                        );
-                    })}
-            </section>
 
             <section className="card w-full flex flex-col gap-5">
                 <TextInput
@@ -294,18 +252,36 @@ const CharacterForm = ({ character, operation }) => {
                     label="Age"
                     placeholder="Input character age"
                     min={0}
+                    value={characterData.physicalDescription.age}
+                    onChange={(newAge) => {
+                        setCharacterData({
+                            ...characterData,
+                            physicalDescription: {
+                                ...characterData.physicalDescription,
+                                age: newAge,
+                            },
+                        });
+                    }}
                 />
+                {/* <p>{characterData.physicalDescription.age}</p> */}
 
                 <Select
                     label="Gender"
                     data={["Male", "Female", "Nonbinary", "Other"]}
-                    value={characterData.gender}
-                    onChange={(gender) =>
-                        setCharacterData({ ...characterData, gender })
+                    value={characterData.physicalDescription.gender}
+                    onChange={(newGender) =>
+                        setCharacterData({
+                            ...characterData,
+                            physicalDescription: {
+                                ...characterData.physicalDescription,
+                                gender: newGender,
+                            },
+                        })
                     }
                     placeholder="Select gender"
                     clearable
                 />
+                {/* <p>{characterData.physicalDescription.gender}</p> */}
 
                 <div className="flex gap-5">
                     <ColorInput
@@ -323,7 +299,7 @@ const CharacterForm = ({ character, operation }) => {
                         }
                         className="w-full"
                     />
-                    {/* {characterData.physicalDescription?.eyeColor} */}
+                    {/* <p>{characterData.physicalDescription.eyeColor}</p> */}
 
                     <ColorInput
                         label="Hair Color"
@@ -340,6 +316,7 @@ const CharacterForm = ({ character, operation }) => {
                         }
                         className="w-full"
                     />
+                    {/* <p>{characterData.physicalDescription.hairColor}</p> */}
                 </div>
                 <TextInput
                     label="Height"
@@ -355,6 +332,7 @@ const CharacterForm = ({ character, operation }) => {
                     }
                     placeholder="e.g. 5'9"
                 />
+                {/* <p>{characterData.physicalDescription.height}</p> */}
             </section>
 
             <section className="card w-full flex flex-col gap-5">
@@ -399,12 +377,93 @@ const CharacterForm = ({ character, operation }) => {
                     label="Skills"
                 />
             </section>
+            <section className="card w-full flex flex-col gap-5">
+                <div className="flex justify-between">
+                    <label
+                        style={{
+                            fontSize: "var(--mantine-font-size-sm)",
+                            fontWeight: "500",
+                        }}
+                    >
+                        Relationships
+                    </label>
+                    <i
+                        className="fa-solid fa-plus cursor-pointer"
+                        onClick={() => {
+                            setModalType("relationship");
+                            setOpen(true);
+                        }}
+                    ></i>
+                </div>
+                {characterData.relationships?.length > 0 &&
+                    characterData.relationships.map((relationship, index) => {
+                        return (
+                            <RelationshipItem
+                                key={index}
+                                relationship={relationship}
+                                onEdit={() => {
+                                    setEditingItem(relationship);
+                                    setModalType("relationship");
+                                    setOpen(true);
+                                }}
+                                onDelete={() =>
+                                    handleDelete(
+                                        "relationship",
+                                        relationship.id
+                                    )
+                                }
+                            />
+                        );
+                    })}
+            </section>
+
+            <section className="card w-full flex flex-col gap-5">
+                <div className="flex justify-between">
+                    <label
+                        style={{
+                            fontSize: "var(--mantine-font-size-sm)",
+                            fontWeight: "500",
+                        }}
+                    >
+                        Biography
+                    </label>
+                    <i
+                        className="fa-solid fa-plus cursor-pointer"
+                        onClick={() => {
+                            setModalType("biography");
+                            setOpen(true);
+                        }}
+                    ></i>
+                </div>
+                {characterData.biography?.length > 0 && (
+                    <div>
+                        {characterData.biography.map((event, index) => {
+                            return (
+                                <BiographyItem
+                                    key={event.id}
+                                    event={event}
+                                    onEdit={() => {
+                                        setEditingItem(event);
+                                        setModalType("biography");
+                                        setOpen(true);
+                                    }}
+                                    onDelete={() =>
+                                        handleDelete("biography", event.id)
+                                    }
+                                />
+                            );
+                        })}
+                    </div>
+                )}
+            </section>
 
             <div className="flex gap-5 justify-end">
                 <Button type="submit">
                     {operation == "editing" ? "save changes" : "create"}
                 </Button>
-                <Button variant="outline">cancel</Button>
+                <Button variant="outline" onClick={() => onDoneEditing()}>
+                    cancel
+                </Button>
             </div>
         </form>
     );

@@ -39,7 +39,7 @@ const getCharacter = async (req, res) => {
 
     // check user owns character
     const user = await User.findById(req.user._id);
-    console.log(character.user);
+    // console.log(character.user);
 
     if (!character.user.equals(user._id)) {
         return res.status(401).json({ error: "Not authorized" });
@@ -84,10 +84,12 @@ const addCharacter = async (req, res) => {
 /** EDIT CHARACTER */
 const updateCharacter = async (req, res) => {
     // grab data from request body
-    const { name } = req.body;
+    const { characterData } = req.body;
+
+    console.log(characterData);
 
     // validation: check fields are not empty
-    if (!name) {
+    if (!characterData.name) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -109,8 +111,12 @@ const updateCharacter = async (req, res) => {
     }
 
     try {
-        await character.updateOne({ name });
-        res.status(200).json({ success: "Character updated" });
+        await character.updateOne(characterData);
+        const updated = await Character.findById(req.params.characterId);
+        res.status(200).json({
+            success: "Character updated",
+            character: updated,
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

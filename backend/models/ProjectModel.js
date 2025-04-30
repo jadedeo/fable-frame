@@ -11,8 +11,8 @@ const ProjectSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        characters: {
-            type: Array,
+        description: {
+            type: String,
             required: false,
         },
     },

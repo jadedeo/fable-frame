@@ -57,4 +57,31 @@ const createCharacter = async (projectId, characterData) => {
     return data;
 };
 
-export { getProjectCharacters, getCharacter, createCharacter };
+/** Update character */
+const updateCharacter = async (projectId, characterData) => {
+    console.log("HERE", characterData);
+    if (!characterData.name) {
+        throw Error("Character name is required");
+    }
+
+    const res = await fetch(
+        `/api/projects/${projectId}/characters/${characterData._id}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({ characterData }),
+        }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+        throw Error(data.error);
+    }
+    return data;
+};
+
+export { getProjectCharacters, getCharacter, createCharacter, updateCharacter };

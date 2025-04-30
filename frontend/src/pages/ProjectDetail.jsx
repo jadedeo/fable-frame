@@ -1,4 +1,5 @@
 import { getProjectCharacters } from "../controllers/charactersController";
+import { getProject } from "../controllers/projectsController";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -9,16 +10,29 @@ import Heading from "../components/Heading";
 const ProjectDetail = () => {
     const { projectId } = useParams();
     const [characters, setCharacters] = useState([]);
+    const [project, setProject] = useState({});
 
     //loading state
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const data = await getProject(projectId);
+
+                console.log("project:", data);
+                setProject(data.project);
+
+                // setLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
+        };
         const fetchCharacters = async () => {
             try {
                 const data = await getProjectCharacters(projectId);
 
-                console.log("project chars", data);
+                console.log("project characters:", data);
                 setCharacters(data.projectCharacters);
 
                 setLoading(false);
@@ -27,6 +41,7 @@ const ProjectDetail = () => {
             }
         };
 
+        fetchProject();
         fetchCharacters();
     }, [projectId]);
 
@@ -40,22 +55,7 @@ const ProjectDetail = () => {
                         <i className="fa-solid fa-pencil"></i>
                         <i className="fa-solid fa-trash-can"></i>
                     </div>
-                    <p>
-                        PROJECT DESCRIPTION HERE Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Donec libero dui, tincidunt
-                        vel porttitor et, elementum sit amet ligula. Nunc rutrum
-                        lacus vitae dapibus tempus. Maecenas venenatis diam sit
-                        amet urna eleifend, a euismod orci tempus. Etiam sed
-                        ultricies erat. Donec eget libero dui. Nam malesuada,
-                        orci sed consectetur molestie, diam felis ultrices dui,
-                        vel feugiat odio leo et lectus.
-                    </p>
-                    <p>
-                        PROJECT DESCRIPTION HERE Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Donec libero dui, tincidunt
-                        vel porttitor et, elementum sit amet ligula. Nunc rutrum
-                        lacus vitae dapibus tempus.
-                    </p>
+                    <p>{project.description}</p>
                 </section>
 
                 {loading && (

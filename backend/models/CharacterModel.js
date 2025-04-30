@@ -18,51 +18,43 @@ const CharacterSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            required: false,
         },
         aliases: {
             type: Array,
-            required: false,
         },
         age: {
             type: Number,
-            required: false,
         },
         status: {
             type: String,
-            required: false,
         },
         role: {
             type: Array,
-            required: false,
         },
         goal: {
             type: String,
-            required: false,
         },
         physicalDescription: {
-            type: Array,
-            required: false,
+            age: { type: Number },
+            gender: { type: String },
+            eyeColor: { type: String },
+            hairColor: { type: String },
+            height: { type: String },
         },
         personality: {
             type: Array,
-            required: false,
         },
         habitsMannerisms: {
             type: String,
-            required: false,
         },
         skills: {
             type: Array,
-            required: false,
         },
         biography: {
             type: Array,
-            required: false,
         },
         relationships: {
             type: Array,
-            required: false,
         },
     },
     { timestamps: true }

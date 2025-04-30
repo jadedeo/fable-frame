@@ -19,6 +19,34 @@ const getUserProjects = async (req, res) => {
     }
 };
 
+const getProject = async (req, res) => {
+    console.log(req.params);
+    // check id is valid type
+    if (!mongoose.Types.ObjectId.isValid(req.params.projectId)) {
+        return res.status(400).json({ error: "Incorrect ID" });
+    }
+
+    // check project exists
+    const project = await Project.findById(req.params.projectId);
+    if (!project) {
+        return res.status(400).json({ error: "Project not found" });
+    }
+
+    // check user owns character
+    const user = await User.findById(req.user._id);
+
+    if (!project.user.equals(user._id)) {
+        return res.status(401).json({ error: "Not authorized" });
+    }
+
+    try {
+        const project = await Project.findById(req.params.projectId);
+        res.status(200).json({ project, email: user.email });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 /** ADD PROJECT */
 const addProject = async (req, res) => {
     // grab data from request body
@@ -123,4 +151,10 @@ const deleteProject = async (req, res) => {
 
 /** REMOVE SETTING */
 
-export { getUserProjects, addProject, updateProject, deleteProject };
+export {
+    getUserProjects,
+    getProject,
+    addProject,
+    updateProject,
+    deleteProject,
+};
