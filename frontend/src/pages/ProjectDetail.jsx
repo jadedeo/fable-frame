@@ -181,7 +181,7 @@ const ProjectDetail = () => {
                         <i className="fa-solid fa-trash-can text-white"></i>
                     </button>
                     <button
-                        className="w-12 h-12 rounded-full bg-neutral-800 hover:bg-neutral-900 flex items-center justify-center shadow-lg"
+                        className="w-12 h-12 rounded-full bg-neutral-600 hover:bg-neutral-700 flex items-center justify-center shadow-lg"
                         onClick={() => {
                             setModalType("edit");
                             setOpen(true);

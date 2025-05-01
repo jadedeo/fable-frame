@@ -65,7 +65,7 @@ const CharacterDetail = () => {
                         <i className="fa-solid fa-trash-can text-white"></i>
                     </button>
                     <button
-                        className="w-12 h-12 rounded-full bg-neutral-800 hover:bg-neutral-900 flex items-center justify-center shadow-lg"
+                        className="w-12 h-12 rounded-full bg-neutral-600 hover:bg-neutral-700 flex items-center justify-center shadow-lg"
                         onClick={() => setIsEditing(true)}
                         title="Edit character"
                     >
@@ -76,7 +76,7 @@ const CharacterDetail = () => {
 
             {/* <p>isEditing: {isEditing ? "true" : "false"}</p> */}
 
-            <div className="flex flex-col gap-10 ">
+            <div className="flex flex-col">
                 {loading && (
                     <div className="w-full flex items-center justify-center">
                         <i className="fa-solid fa-spinner animate-spin text-3xl text-center block"></i>
@@ -106,7 +106,7 @@ const CharacterDetail = () => {
                                 <p>---</p>
                             )}
 
-                            <section className="grid grid-cols-[1fr,2fr] gap-x-5 gap-y-3">
+                            <section className="grid grid-cols-[5fr,6fr] gap-x-5 gap-y-3">
                                 <div>
                                     <h6 className="text-neutral-400">
                                         ALIASES
@@ -180,7 +180,7 @@ const CharacterDetail = () => {
                                 <img
                                     src={`http://localhost:4000/${character.image}`} // ✅ works in dev with Vite proxy
                                     alt={`${character.name}'s portrait`}
-                                    className="rounded-lg object-cover w-full h-[300px]"
+                                    className="rounded-lg object-cover w-full h-full max-h-[500px]"
                                 />
                             ) : (
                                 <div className="rounded-lg h-full w-full bg-neutral-300 flex justify-center items-center">

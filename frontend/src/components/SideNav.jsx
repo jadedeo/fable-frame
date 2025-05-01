@@ -47,13 +47,14 @@ const SideNav = () => {
     }, [projectId, project]);
 
     const handleLogout = () => {
-        if (confirm("Confirm Logout?")) {
-            console.log("logout");
-            setUser({ email: null, posts: [] });
-            localStorage.removeItem("email");
-            localStorage.removeItem("token");
-            navigate("/");
-        }
+        console.log("logout");
+        // if (confirm("Confirm Logout?")) {
+        //     console.log("logout");
+        //     setUser({ email: null, posts: [] });
+        //     localStorage.removeItem("email");
+        //     localStorage.removeItem("token");
+        //     navigate("/");
+        // }
     };
 
     return (

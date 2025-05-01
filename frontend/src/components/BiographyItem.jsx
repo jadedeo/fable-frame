@@ -21,14 +21,26 @@ const BiographyItem = ({ event, onEdit, onDelete }) => {
                         </div>
                     </div>
                     <div className="flex gap-3 items-start">
-                        <i
+                        <small
+                            className="underline cursor-pointer"
+                            onClick={onEdit}
+                        >
+                            Edit
+                        </small>
+                        <small
+                            className="underline cursor-pointer text-red-500"
+                            onClick={onDelete}
+                        >
+                            Remove
+                        </small>
+                        {/* <i
                             className="fa-solid fa-pencil cursor-pointer"
                             onClick={onEdit}
                         ></i>
                         <i
                             className="fa-solid fa-trash-can cursor-pointer"
                             onClick={onDelete}
-                        ></i>
+                        ></i> */}
                     </div>
                 </div>
 
