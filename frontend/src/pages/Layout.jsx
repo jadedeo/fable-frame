@@ -12,23 +12,13 @@ const Layout = () => {
     const { user, setUser } = useContext(UserContext);
     console.log(user);
 
-    // const handleLogout = () => {
-    //     if (confirm("Confirm Logout?")) {
-    //         console.log("logout");
-    //         setUser({ email: null, posts: [] });
-    //         localStorage.removeItem("email");
-    //         localStorage.removeItem("token");
-    //         navigate("/");
-    //     }
-    // };
-
     //bg-[url(gradientBg.jpg)] bg-no-repeat bg-cover
     return (
-        <div className="p-10 bg-neutral-100 h-screen w-screen ">
+        <div className="p-10  h-screen w-screen max-w-screen-xl mx-auto">
             {/* IF USER LOGGED IN */}
             {user.email ? (
                 <div className="flex gap-8 h-full">
-                    <header className="bg-white w-[150px] h-full">
+                    <header className="card p-0 w-[130px] h-full">
                         <SideNav />
                     </header>
 

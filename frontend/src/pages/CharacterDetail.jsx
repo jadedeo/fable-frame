@@ -92,63 +92,86 @@ const CharacterDetail = () => {
             {!isEditing && (
                 <>
                     <div className="flex gap-10 pb-5 px-5">
-                        <section className="flex flex-col gap-5 card">
-                            <h1 className="font-bold text-4xl">
+                        <section className="flex flex-col gap-5 card w-full">
+                            <h1 className="font-bold text-3xl">
                                 {character.name}
                             </h1>
-                            <p className="">{character.description}</p>
-
-                            {/* <hr></hr> */}
+                            {character.status ? (
+                                <p className="">{character.description}</p>
+                            ) : (
+                                <p>---</p>
+                            )}
 
                             <section className="grid grid-cols-[1fr,2fr] gap-x-5 gap-y-3">
                                 <div>
                                     <h6 className="text-neutral-400">
                                         ALIASES
                                     </h6>
-                                    <div className="flex gap-1">
-                                        {character.aliases?.map(
-                                            (alias, index) => {
-                                                return (
-                                                    <Badge
-                                                        key={index}
-                                                        color="gray"
-                                                    >
-                                                        {alias}
-                                                    </Badge>
-                                                );
-                                            }
+                                    <div className="flex flex-wrap gap-1">
+                                        {character.aliases?.length > 0 ? (
+                                            character.aliases?.map(
+                                                (alias, index) => {
+                                                    return (
+                                                        <Badge
+                                                            key={index}
+                                                            color="gray"
+                                                        >
+                                                            {alias}
+                                                        </Badge>
+                                                    );
+                                                }
+                                            )
+                                        ) : (
+                                            <p>---</p>
                                         )}
                                     </div>
                                 </div>
 
                                 <div>
                                     <h6 className="text-neutral-400">ROLE</h6>
-                                    <div className="flex gap-1">
-                                        {character.role?.map((role, index) => {
-                                            return (
-                                                <Badge key={index} color="gray">
-                                                    {role}
-                                                </Badge>
-                                            );
-                                        })}
+                                    <div className="flex flex-wrap gap-1">
+                                        {character.role?.length > 0 ? (
+                                            character.role?.map(
+                                                (role, index) => {
+                                                    return (
+                                                        <Badge
+                                                            key={index}
+                                                            color="gray"
+                                                        >
+                                                            {role}
+                                                        </Badge>
+                                                    );
+                                                }
+                                            )
+                                        ) : (
+                                            <p>---</p>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div>
                                     <h6 className="text-neutral-400">STATUS</h6>
-                                    <Badge color="gray">
-                                        {character.status}
-                                    </Badge>
+                                    {character.status ? (
+                                        <Badge color="gray">
+                                            {character.status}
+                                        </Badge>
+                                    ) : (
+                                        <p>---</p>
+                                    )}
                                 </div>
 
                                 <div>
                                     <h6 className="text-neutral-400">GOAL</h6>
-                                    <p>{character.goal}</p>
+                                    {character.goal ? (
+                                        <p>{character.goal}</p>
+                                    ) : (
+                                        <p>---</p>
+                                    )}
                                 </div>
                             </section>
                         </section>
                         <section className="w-full flex flex-col gap-5">
-                            <div className="h-full w-[300px] bg-black"></div>
+                            <div className="rounded-lg h-full w-full bg-black"></div>
                         </section>
                     </div>
 
@@ -160,47 +183,74 @@ const CharacterDetail = () => {
 
                             <div className="card w-full grid grid-cols-2 gap-3">
                                 <p className="font-bold">Eye Color</p>
-                                <div
-                                    className="w-full h-5"
-                                    style={{
-                                        backgroundColor:
-                                            character.physicalDescription
-                                                ?.eyeColor,
-                                    }}
-                                ></div>
+                                {character.physicalDescription?.eyeColor ? (
+                                    <div
+                                        className="w-full h-5 rounded-lg"
+                                        style={{
+                                            backgroundColor:
+                                                character.physicalDescription
+                                                    ?.eyeColor,
+                                        }}
+                                    ></div>
+                                ) : (
+                                    <p className="text-right">---</p>
+                                )}
 
                                 <p className="font-bold">Hair Color</p>
-                                <div
-                                    className="w-full h-5"
-                                    style={{
-                                        backgroundColor:
-                                            character.physicalDescription
-                                                ?.hairColor,
-                                    }}
-                                ></div>
+                                {character.physicalDescription?.hairColor ? (
+                                    <div
+                                        className="w-full h-5 rounded-lg"
+                                        style={{
+                                            backgroundColor:
+                                                character.physicalDescription
+                                                    ?.hairColor,
+                                        }}
+                                    ></div>
+                                ) : (
+                                    <p className="text-right">---</p>
+                                )}
 
                                 <p className="font-bold">Height</p>
-                                <p>{character.physicalDescription?.height}</p>
+                                {character.physicalDescription?.height ? (
+                                    <p className="text-center">
+                                        {character.physicalDescription?.height}
+                                    </p>
+                                ) : (
+                                    <p className="text-right">---</p>
+                                )}
 
                                 <p className="font-bold">Gender</p>
-                                <p>{character.physicalDescription?.gender}</p>
+                                {character.physicalDescription?.gender ? (
+                                    <p className="text-center">
+                                        {character.physicalDescription?.gender}
+                                    </p>
+                                ) : (
+                                    <p className="text-right">---</p>
+                                )}
                             </div>
                         </section>
                         <div className="flex flex-col gap-3 p-5">
-                            <section className=" flex flex-col gap-3">
+                            <section className="flex flex-col gap-3">
                                 <h6 className="text-neutral-400">
                                     PERSONALITY
                                 </h6>
 
                                 <div className="card flex flex-wrap gap-1">
-                                    {character.personality?.map(
-                                        (alias, index) => {
-                                            return (
-                                                <Badge key={index} color="gray">
-                                                    {alias}
-                                                </Badge>
-                                            );
-                                        }
+                                    {character.personality?.length > 0 ? (
+                                        character.personality?.map(
+                                            (alias, index) => {
+                                                return (
+                                                    <Badge
+                                                        key={index}
+                                                        color="gray"
+                                                    >
+                                                        {alias}
+                                                    </Badge>
+                                                );
+                                            }
+                                        )
+                                    ) : (
+                                        <p>---</p>
                                     )}
                                 </div>
                             </section>
@@ -210,7 +260,11 @@ const CharacterDetail = () => {
                                     HABITS & MANNERISMS
                                 </h6>
                                 <div className="card flex flex-wrap gap-1">
-                                    <p>{character.habitsMannerisms}</p>
+                                    {character.habitsMannerisms ? (
+                                        <p>{character.habitsMannerisms}</p>
+                                    ) : (
+                                        <p>---</p>
+                                    )}
                                 </div>
                             </section>
                         </div>
@@ -218,21 +272,32 @@ const CharacterDetail = () => {
 
                     <section className="p-5">
                         <h2 className="text-neutral-400">BIOGRAPHY</h2>
-
-                        <BiographyTimeline biography={character.biography} />
+                        {character.biography?.length > 0 ? (
+                            <BiographyTimeline
+                                biography={character.biography}
+                            />
+                        ) : (
+                            <p>---</p>
+                        )}
                     </section>
 
                     <section className="p-5 flex flex-col gap-3">
                         <h2 className=" text-neutral-400">RELATIONSHIPS</h2>
-                        {character.relationships?.map((relationship, index) => {
-                            return (
-                                <RelationshipItem
-                                    key={index}
-                                    relationship={relationship}
-                                    editable={false}
-                                />
-                            );
-                        })}
+                        {character.biography?.length > 0 ? (
+                            character.relationships?.map(
+                                (relationship, index) => {
+                                    return (
+                                        <RelationshipItem
+                                            key={index}
+                                            relationship={relationship}
+                                            editable={false}
+                                        />
+                                    );
+                                }
+                            )
+                        ) : (
+                            <p>---</p>
+                        )}
                     </section>
                 </>
             )}

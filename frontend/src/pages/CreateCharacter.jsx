@@ -11,7 +11,7 @@ const CreateCharacter = () => {
         navigate(`/projects/${projectId}`);
     };
     return (
-        <div className="h-full">
+        <div className="h-full overflow-scroll">
             <Heading title={"Create New Character Profile"} />
             <CharacterForm onDoneEditing={onDoneEditing} />
         </div>

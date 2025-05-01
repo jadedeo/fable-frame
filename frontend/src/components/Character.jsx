@@ -2,7 +2,7 @@ import { Pill } from "@mantine/core";
 
 const Character = ({ character }) => {
     return (
-        <div className="card w-full h-full gap-5 flex hover:cursor-pointer hover:inset-sahdow-md hover:inset-shadow-neutral-300 hover:shadow-none">
+        <div className="card w-full h-full  flex hover:cursor-pointer hover:inset-sahdow-md hover:inset-shadow-neutral-300 hover:shadow-none">
             <div className="h-full w-35 bg-neutral-200 rounded-full"></div>
             <div className="w-full flex flex-col gap-2">
                 <h2 className="font-bold text-lg">{character.name}</h2>

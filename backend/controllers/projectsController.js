@@ -74,38 +74,39 @@ const addProject = async (req, res) => {
 };
 
 /** UPDATE PROJECT */
+// Backend: expects direct fields from req.body, not req.body.projectData
 const updateProject = async (req, res) => {
-    console.log(req.body);
-    console.log(req.params);
-    // grab data from request body
-    const { projectData } = req.body;
-    const { name, description } = projectData;
+    const { name, description, tags } = req.body;
+    const { projectId } = req.params;
 
-    // validation: check fields are not empty
-    if (!projectData.name) {
+    // Validation
+    if (!name) {
         return res.status(400).json({ error: "Project name is required" });
     }
 
-    // check id is valid type
-    if (!mongoose.Types.ObjectId.isValid(req.params.projectId)) {
+    if (!mongoose.Types.ObjectId.isValid(projectId)) {
         return res.status(400).json({ error: "Incorrect ID" });
     }
 
-    // check character exists
-    const project = await Project.findById(req.params.projectId);
+    const project = await Project.findById(projectId);
     if (!project) {
-        return res.status(400).json({ error: "Project not found" });
+        return res.status(404).json({ error: "Project not found" });
     }
 
-    // check user owns character
     const user = await User.findById(req.user._id);
     if (!project.user.equals(user._id)) {
         return res.status(401).json({ error: "Not authorized" });
     }
 
     try {
-        await project.updateOne({ name });
-        res.status(200).json({ success: "Project updated" });
+        const updatedProject = await project.updateOne(
+            { name, description, tags },
+            { new: true }
+        );
+        res.status(200).json({
+            success: "Project updated",
+            project: updatedProject,
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

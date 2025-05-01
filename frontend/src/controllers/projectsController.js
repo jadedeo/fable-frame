@@ -64,7 +64,7 @@ const updateProject = async (projectId, projectData) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ projectData }),
+        body: JSON.stringify(projectData),
     });
 
     const data = await res.json();

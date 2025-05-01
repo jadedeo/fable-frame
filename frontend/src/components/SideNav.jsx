@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { getProject } from "../controllers/projectsController";
 import { getProjectCharacters } from "../controllers/charactersController";
 
-import logo from "../assets/fableframelogo.png"; // Adjust path as needed
+import logo from "../assets/fableframelogo.png";
 
 const SideNav = () => {
     const { user, setUser } = useContext(UserContext);
@@ -29,7 +29,7 @@ const SideNav = () => {
                             (a, b) =>
                                 new Date(b.updatedAt) - new Date(a.updatedAt)
                         )
-                        .slice(0, 5);
+                        .slice(0, 3);
 
                     console.log("*****************");
                     console.log(projectData);
@@ -44,7 +44,7 @@ const SideNav = () => {
         };
 
         fetchData();
-    }, [projectId]);
+    }, [projectId, project]);
 
     const handleLogout = () => {
         if (confirm("Confirm Logout?")) {
@@ -57,20 +57,19 @@ const SideNav = () => {
     };
 
     return (
-        <section className="px-2 py-0 h-full flex flex-col justify-between bg-white">
+        <section className="px-2 py-0 h-full flex flex-col justify-between relative">
             <div className="flex flex-col gap-5">
                 <div
-                    className="flex gap-3 items-center cursor-pointer"
+                    className="flex gap-3 items-center cursor-pointer relative overflow-visible"
                     onClick={() => navigate("/")}
                 >
-                    {/* <div className="w-full h-20 bg-neutral-500"></div> */}
                     <img
                         src={logo}
-                        className="absolute left-[55px] top-[25px] h-[150px]"
+                        className="h-[150px] w-auto absolute left-1/2 -translate-x-1/2 top-[-30px]"
                     />
                 </div>
 
-                <div className="mt-[125px] px-2 text-center">
+                <div className="mt-[110px] px-2 text-center">
                     <hr className="mt-2 mb-5" />
 
                     <Link to={`/`}>
@@ -86,22 +85,29 @@ const SideNav = () => {
                                 this project
                             </p>
 
-                            <p className="text-xs">{project?.name}</p>
+                            <Link
+                                to={`/projects/${projectId}`}
+                                className="block hover:underline text-ellipsis text-xs"
+                            >
+                                {project?.name}
+                            </Link>
                             <br></br>
 
                             <div>
                                 <p className="text-xs text-neutral-400">
                                     CHARACTERS
                                 </p>
-                                {topCharacters?.map((character) => (
-                                    <Link
-                                        to={`/projects/${projectId}/characters/${character._id}`}
-                                        key={character._id}
-                                        className="block hover:underline line-clamp-1 text-ellipsis text-xs"
-                                    >
-                                        {character.name}
-                                    </Link>
-                                ))}
+                                <div className="flex flex-col gap-1">
+                                    {topCharacters?.map((character) => (
+                                        <Link
+                                            to={`/projects/${projectId}/characters/${character._id}`}
+                                            key={character._id}
+                                            className="block hover:underline line-clamp-1 text-ellipsis text-xs"
+                                        >
+                                            {character.name}
+                                        </Link>
+                                    ))}
+                                </div>
 
                                 <br></br>
                             </div>
@@ -110,18 +116,25 @@ const SideNav = () => {
                                     SETTINGS
                                 </p>
 
-                                <p className="text-xs">Coming soon...</p>
+                                <p className="text-xs text-neutral-300">
+                                    Coming soon...
+                                </p>
                                 <br></br>
                             </div>
                         </>
                     )}
                 </div>
             </div>
-            <div className="mb-4 px-2 flex gap-1 justify-center">
-                <button onClick={handleLogout} className="cursor-pointer">
-                    <small className="text-neutral-400">ABOUT</small>
+            <div className="mb-4 px-2 flex flex-col  justify-center">
+                <button className="cursor-pointer">
+                    <small className="hover:underline text-neutral-400">
+                        ABOUT
+                    </small>
                 </button>
-                <button onClick={handleLogout} className="cursor-pointer">
+                <button
+                    onClick={handleLogout}
+                    className="hover:underline cursor-pointer"
+                >
                     <small>LOGOUT</small>
                 </button>
             </div>

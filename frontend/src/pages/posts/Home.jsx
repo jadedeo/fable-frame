@@ -6,7 +6,7 @@ import {
 } from "../../controllers/projectsController";
 import { PostContext } from "../../contexts/PostContext";
 import Post from "../../components/Post";
-import Project from "../../components/ProjectCard";
+import ProjectCard from "../../components/ProjectCard";
 import { Link } from "react-router-dom";
 import Heading from "../../components/Heading";
 import { Modal, Button } from "@mantine/core";
@@ -63,21 +63,10 @@ const Home = () => {
 
             <Heading
                 title={"Your Projects"}
-                subtitle={"You can't edit a blank page."}
+                // subtitle={"You can't edit a blank page."}
             />
 
             <div className="mt-10 flex flex-col gap-10">
-                {/* <div className="mx-5 flex justify-between items-center">
-                    <h2 className="font-bold text-xl">projects</h2>
-
-                    <i
-                        className="fa-solid fa-plus cursor-pointer"
-                        onClick={() => {
-                            setOpen(true);
-                        }}
-                    ></i>
-                </div> */}
-
                 {loading && (
                     <div className="w-full flex items-center justify-center">
                         <i className="fa-solid fa-spinner animate-spin text-3xl text-center block"></i>
@@ -85,17 +74,17 @@ const Home = () => {
                 )}
 
                 {projects && (
-                    <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <section className="grid auto-rows-[1fr] grid-cols-1 md:grid-cols-2 gap-5">
                         {projects.map((project) => (
                             <Link
                                 key={project._id}
                                 to={`/projects/${project._id}`}
                             >
-                                <Project project={project} />
+                                <ProjectCard project={project} />
                             </Link>
                         ))}
                         <div
-                            className="card w-full h-[50%] md:h-full md:w-[20%] flex items-center justify-center text-2xl justify-self-start cursor-pointer"
+                            className="card bg-neutral-50 h-full w-full flex items-center justify-center text-2xl justify-self-start cursor-pointer"
                             onClick={() => {
                                 setOpen(true);
                             }}

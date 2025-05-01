@@ -1,3 +1,4 @@
+import { Badge } from "@mantine/core";
 import {
     VerticalTimeline,
     VerticalTimelineElement,
@@ -22,9 +23,19 @@ const BiographyTimeline = ({ biography }) => {
                         }}
                         date="start - end"
                     >
-                        <h4 className="vertical-timeline-element-title font-bold">
-                            {event.title}
-                        </h4>
+                        <div className="flex gap-3 items-center">
+                            <h4 className="vertical-timeline-element-title font-bold">
+                                {event.title}
+                            </h4>
+                            {event.tags.length > 0 &&
+                                event.tags?.map((tag, index) => {
+                                    return (
+                                        <Badge key={index} color="gray">
+                                            {tag}
+                                        </Badge>
+                                    );
+                                })}
+                        </div>
                         <p className="!mt-0">{event.description}</p>
                     </VerticalTimelineElement>
                 );

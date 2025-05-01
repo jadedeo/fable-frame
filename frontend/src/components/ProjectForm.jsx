@@ -31,12 +31,15 @@ const ProjectForm = ({ initialData, closeModal, onUpdate }) => {
 
         try {
             if (initialData) {
+                console.log("update project", projectData);
                 await updateProject(initialData._id, projectData);
             } else {
                 await createProject(projectData);
             }
 
-            if (onUpdate) onUpdate();
+            if (onUpdate) {
+                onUpdate();
+            }
             closeModal();
         } catch (err) {
             console.error("Error saving project:", err);

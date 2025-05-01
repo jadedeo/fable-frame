@@ -7,7 +7,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ProjectForm from "../components/ProjectForm";
-import { Modal, Button } from "@mantine/core";
+import { Modal, Button, Badge } from "@mantine/core";
 
 import { useState, useEffect } from "react";
 import Character from "../components/Character";
@@ -65,7 +65,7 @@ const ProjectDetail = () => {
     };
 
     return (
-        <div className="h-full">
+        <div className="h-full overflow-scroll">
             <Modal
                 opened={open}
                 onClose={() => setOpen(false)}
@@ -114,37 +114,42 @@ const ProjectDetail = () => {
 
             <Heading title={project.name} />
 
-            <div className="mt-10 flex flex-col gap-10">
-                <section className="mx-5 flex flex-col gap-5">
-                    <div className="flex gap-3">
-                        <i
-                            className="fa-solid fa-pencil"
-                            onClick={() => {
-                                setModalType("edit");
-                                setOpen(true);
-                            }}
-                        ></i>
-                        <i
-                            className="fa-solid fa-trash-can"
-                            onClick={() => {
-                                setModalType("delete");
-                                setOpen(true);
-                            }}
-                        ></i>
+            <div className="mt-5 flex flex-col gap-5">
+                <section className="p-5 flex flex-col gap-5">
+                    <div className="flex flex-col gap-1">
+                        <h6 className="uppercase text-neutral-400">tags</h6>
+                        <div className="flex gap-1">
+                            {project.tags?.map((tag, index) => {
+                                return (
+                                    <Badge key={index} color="gray">
+                                        {tag}
+                                    </Badge>
+                                );
+                            })}
+                        </div>
                     </div>
-                    <p>{project.description}</p>
                 </section>
 
-                <section className="flex flex-col gap-5">
-                    <div className="mx-5 flex justify-between items-center">
+                <section className="p-5 flex flex-col gap-5">
+                    <div className="flex flex-col gap-1">
+                        <h6 className="uppercase text-neutral-400">
+                            description
+                        </h6>
+                        <p>{project.description}</p>
+                    </div>
+                </section>
+
+                <section className="flex flex-col gap-3 p-5">
+                    {/* <div className="mx-5 flex justify-between items-center">
                         <h2 className="font-bold text-xl">characters</h2>
                         <Link to={"createCharacter"}>
                             <i className="fa-solid fa-plus cursor-pointer"></i>
                         </Link>
-                    </div>
-                    <div className="mx-5 grid grid-cols-2 gap-5">
-                        {characters.length > 0 ? (
-                            characters.map((character) => (
+                    </div> */}
+                    <h6 className="uppercase text-neutral-400">characters</h6>
+                    <div className=" grid auto-rows-[1fr] grid-cols-1 md:grid-cols-2 gap-5">
+                        <>
+                            {characters.map((character) => (
                                 <Link
                                     key={character._id}
                                     to={`/projects/${projectId}/characters/${character._id}`}
@@ -154,12 +159,32 @@ const ProjectDetail = () => {
                                         character={character}
                                     />
                                 </Link>
-                            ))
-                        ) : (
-                            <p>This project has no characters yet.</p>
-                        )}
+                            ))}
+                            <Link to={"createCharacter"}>
+                                <div className="card bg-neutral-50 w-full h-full  flex items-center justify-center text-2xl justify-self-start cursor-pointer">
+                                    <i className="fa-solid fa-plus "></i>
+                                </div>
+                            </Link>
+                        </>
                     </div>
                 </section>
+
+                <div className="flex gap-3">
+                    <i
+                        className="fa-solid fa-pencil"
+                        onClick={() => {
+                            setModalType("edit");
+                            setOpen(true);
+                        }}
+                    ></i>
+                    <i
+                        className="fa-solid fa-trash-can"
+                        onClick={() => {
+                            setModalType("delete");
+                            setOpen(true);
+                        }}
+                    ></i>
+                </div>
             </div>
         </div>
     );
