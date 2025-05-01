@@ -171,7 +171,7 @@ const CharacterDetail = () => {
                             </section>
                         </section>
                         <section className="w-full flex flex-col gap-5">
-                            <div className="rounded-lg h-full w-full bg-black"></div>
+                            <div className="rounded-lg h-full w-full bg-neutral-300"></div>
                         </section>
                     </div>
 

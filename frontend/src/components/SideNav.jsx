@@ -94,8 +94,8 @@ const SideNav = () => {
                             <br></br>
 
                             <div>
-                                <p className="text-xs text-neutral-400">
-                                    CHARACTERS
+                                <p className="uppercase text-xs text-neutral-400">
+                                    RECENT CHARACTERS
                                 </p>
                                 <div className="flex flex-col gap-1">
                                     {topCharacters?.map((character) => (
@@ -112,8 +112,8 @@ const SideNav = () => {
                                 <br></br>
                             </div>
                             <div>
-                                <p className="text-xs text-neutral-400">
-                                    SETTINGS
+                                <p className="uppercase text-xs text-neutral-400">
+                                    RECENT SETTINGS
                                 </p>
 
                                 <p className="text-xs text-neutral-300">

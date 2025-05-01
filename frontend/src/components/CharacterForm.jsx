@@ -266,7 +266,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                         });
                     }}
                 />
-                {/* <p>{characterData.physicalDescription.age}</p> */}
 
                 <Select
                     label="Gender"
@@ -284,7 +283,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                     placeholder="Select gender"
                     clearable
                 />
-                {/* <p>{characterData.physicalDescription.gender}</p> */}
 
                 <div className="flex gap-5">
                     <ColorInput
@@ -302,7 +300,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                         }
                         className="w-full"
                     />
-                    {/* <p>{characterData.physicalDescription.eyeColor}</p> */}
 
                     <ColorInput
                         label="Hair Color"
@@ -319,7 +316,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                         }
                         className="w-full"
                     />
-                    {/* <p>{characterData.physicalDescription.hairColor}</p> */}
                 </div>
                 <TextInput
                     label="Height"
@@ -335,7 +331,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                     }
                     placeholder="e.g. 5'9"
                 />
-                {/* <p>{characterData.physicalDescription.height}</p> */}
             </section>
 
             <section className="card w-full flex flex-col gap-5">
@@ -351,10 +346,6 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                     placeholder="Pick or add traits"
                     label="Personality"
                 />
-                {/* <p>personality:</p>
-                {characterData.personality.map((trait) => (
-                    <p key={trait}>{trait}</p>
-                ))} */}
 
                 <Textarea
                     label="Habits & Mannerisms"
