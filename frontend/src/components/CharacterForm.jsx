@@ -58,6 +58,10 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
     const [modalType, setModalType] = useState(null);
 
     const [editingItem, setEditingItem] = useState(null);
+
+    const [imageFile, setImageFile] = useState(null);
+    const [removeImage, setRemoveImage] = useState(false);
+
     const handleDelete = (type, idToDelete) => {
         if (type == "biography") {
             setCharacterData({
@@ -75,43 +79,77 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
             });
         }
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(characterData, projectId);
-        if (isEditing) {
-            console.log("SAVE EDIT");
-            try {
+
+        const formData = new FormData();
+        formData.append("characterData", JSON.stringify(characterData)); // character object as string
+        if (imageFile) {
+            formData.append("image", imageFile); // append image
+        }
+        if (removeImage) {
+            formData.append("removeImage", "true");
+        }
+
+        try {
+            if (isEditing) {
+                console.log("SAVE EDIT");
                 const data = await updateCharacter(
                     projectId,
-                    // characterData._id,
-                    characterData
-                );
+                    character._id,
+                    formData
+                ); // pass FormData
                 console.log("character updated", data);
-                console.log(
-                    `/projects/${projectId}/characters/${data.character._id}`
-                );
                 if (onDoneEditing) onDoneEditing();
-                // navigate(`/projects/${projectId}/characters/${data.character._id}`, {
-                //     replace: true,
-                // });
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            console.log("NEW");
-            try {
-                const data = await createCharacter(projectId, characterData);
+            } else {
+                console.log("NEW");
+                const data = await createCharacter(projectId, formData); // pass FormData
                 console.log("character created", data.character._id);
-
                 navigate(
                     `/projects/${projectId}/characters/${data.character._id}`
                 );
-            } catch (error) {
-                console.error(error);
             }
+        } catch (error) {
+            console.error(error);
         }
     };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // console.log(characterData, projectId);
+    //     if (isEditing) {
+    //         console.log("SAVE EDIT");
+    //         try {
+    //             const data = await updateCharacter(
+    //                 projectId,
+    //                 // characterData._id,
+    //                 characterData
+    //             );
+    //             console.log("character updated", data);
+    //             console.log(
+    //                 `/projects/${projectId}/characters/${data.character._id}`
+    //             );
+    //             if (onDoneEditing) onDoneEditing();
+    //             // navigate(`/projects/${projectId}/characters/${data.character._id}`, {
+    //             //     replace: true,
+    //             // });
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     } else {
+    //         console.log("NEW");
+    //         try {
+    //             const data = await createCharacter(projectId, characterData);
+    //             console.log("character created", data.character._id);
+
+    //             navigate(
+    //                 `/projects/${projectId}/characters/${data.character._id}`
+    //             );
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     }
+    // };
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5 px-5">
@@ -161,6 +199,59 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
             </h4>
 
             <section className="card w-full flex flex-col gap-5">
+                {/* <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setImageFile(e.target.files[0])}
+                /> */}
+
+                {/* <label htmlFor="image">
+                    {character?.image && (
+                        <span className="text-neutral-500">
+                            (current image exists)
+                        </span>
+                    )}
+                </label> */}
+
+                {/* If a new image is selected, show its name and a remove option */}
+                {imageFile ? (
+                    <div className="flex items-center gap-2 text-sm text-neutral-600">
+                        <span>Selected image: {imageFile.name}</span>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setImageFile(null);
+                                setRemoveImage(false); // reset remove flag when removing new file
+                            }}
+                            className="text-red-500 underline"
+                        >
+                            Remove
+                        </button>
+                    </div>
+                ) : character?.image && !removeImage ? (
+                    // Show current image name + option to remove if it exists and not flagged for removal
+                    <div className="flex items-center gap-2 text-sm text-neutral-600">
+                        <span>
+                            Current image: {character.image.split("/").pop()}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={() => setRemoveImage(true)}
+                            className="text-red-500 underline"
+                        >
+                            Remove image
+                        </button>
+                    </div>
+                ) : (
+                    // Otherwise, show file input
+                    <input
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                    />
+                )}
+
                 <TextInput
                     label="Name"
                     placeholder="Insert character name"

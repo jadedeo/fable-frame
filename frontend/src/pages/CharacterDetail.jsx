@@ -51,6 +51,8 @@ const CharacterDetail = () => {
         fetchCharacterData();
     }, [characterId]);
 
+    console.log("Image path:", character.image);
+
     return (
         <div className="h-full overflow-scroll relative">
             {!isEditing && (
@@ -96,7 +98,7 @@ const CharacterDetail = () => {
                             <h1 className="font-bold text-3xl">
                                 {character.name}
                             </h1>
-                            {character.status ? (
+                            {character.description ? (
                                 <p className="">{character.description}</p>
                             ) : (
                                 <p>---</p>
@@ -171,7 +173,18 @@ const CharacterDetail = () => {
                             </section>
                         </section>
                         <section className="w-full flex flex-col gap-5">
-                            <div className="rounded-lg h-full w-full bg-neutral-300"></div>
+                            {/* <div className="rounded-lg h-full w-full bg-neutral-300"></div> */}
+                            {character.image ? (
+                                <img
+                                    src={`http://localhost:4000/${character.image}`} // ✅ works in dev with Vite proxy
+                                    alt={`${character.name}'s portrait`}
+                                    className="rounded-lg object-cover w-full h-[300px]"
+                                />
+                            ) : (
+                                <div className="rounded-lg h-full w-full bg-neutral-300 flex justify-center items-center">
+                                    <i class="fa-solid fa-image text-3xl text-neutral-400"></i>
+                                </div>
+                            )}
                         </section>
                     </div>
 

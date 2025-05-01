@@ -56,6 +56,10 @@ const CharacterSchema = new mongoose.Schema(
         relationships: {
             type: Array,
         },
+        image: {
+            type: String, // Will store the relative file path (e.g. "uploads/abc123.png")
+            required: false,
+        },
     },
     { timestamps: true }
 );

@@ -26,6 +26,7 @@ app.use(express.json());
 app.use("/api/posts", postsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/projects", projectsRoutes);
+app.use("/uploads", express.static("uploads"));
 
 // // use client app
 // app.use(express.static(path.join(__dirname, "/client/dist")));

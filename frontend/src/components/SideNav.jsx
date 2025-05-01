@@ -31,10 +31,10 @@ const SideNav = () => {
                         )
                         .slice(0, 3);
 
-                    console.log("*****************");
-                    console.log(projectData);
-                    console.log(sortedCharacters);
-                    console.log("*****************");
+                    // console.log("*****************");
+                    // console.log(projectData);
+                    // console.log(sortedCharacters);
+                    // console.log("*****************");
 
                     setTopCharacters(sortedCharacters);
                 } catch (error) {

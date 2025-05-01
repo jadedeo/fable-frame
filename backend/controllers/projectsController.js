@@ -20,7 +20,7 @@ const getUserProjects = async (req, res) => {
 };
 
 const getProject = async (req, res) => {
-    console.log(req.params);
+    // console.log(req.params);
     // check id is valid type
     if (!mongoose.Types.ObjectId.isValid(req.params.projectId)) {
         return res.status(400).json({ error: "Incorrect ID" });
@@ -48,7 +48,7 @@ const getProject = async (req, res) => {
 };
 
 /** ADD PROJECT */
-const addProject = async (req, res) => {
+const createProject = async (req, res) => {
     // grab data from request body
     const { projectData } = req.body;
 
@@ -128,7 +128,7 @@ const deleteProject = async (req, res) => {
 
     // check user owns post
     const user = await User.findById(req.user._id);
-    console.log(project.user);
+    // console.log(project.user);
     if (!project.user.equals(user._id)) {
         return res.status(401).json({ error: "Not authorized" });
     }
@@ -157,7 +157,7 @@ const deleteProject = async (req, res) => {
 export {
     getUserProjects,
     getProject,
-    addProject,
+    createProject,
     updateProject,
     deleteProject,
 };
