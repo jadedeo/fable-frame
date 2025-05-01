@@ -56,19 +56,21 @@ const CharacterDetail = () => {
     return (
         <div className="h-full overflow-scroll relative">
             {!isEditing && (
-                <div className="flex gap-3 fixed bottom-5 right-5 items-center z-auto">
-                    <div
-                        className="cursor-pointer bg-neutral-400 rounded-full w-10 h-10 flex items-center justify-center"
+                <div className="fixed bottom-6 right-6 flex flex-col items-center gap-3 z-50">
+                    <button
+                        className="w-12 h-12 rounded-full bg-neutral-400 hover:bg-neutral-500 flex items-center justify-center shadow-lg"
                         onClick={() => setDeleteModalOpen(true)}
+                        title="Delete character"
                     >
                         <i className="fa-solid fa-trash-can text-white"></i>
-                    </div>
-                    <div
-                        className=" cursor-pointer bg-neutral-800 rounded-full w-15 h-15 flex items-center justify-center"
+                    </button>
+                    <button
+                        className="w-12 h-12 rounded-full bg-neutral-800 hover:bg-neutral-900 flex items-center justify-center shadow-lg"
                         onClick={() => setIsEditing(true)}
+                        title="Edit character"
                     >
-                        <i className="fa-solid fa-pencil text-white text-2xl"></i>
-                    </div>
+                        <i className="fa-solid fa-pencil text-white text-lg"></i>
+                    </button>
                 </div>
             )}
 

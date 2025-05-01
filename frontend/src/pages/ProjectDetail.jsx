@@ -169,21 +169,27 @@ const ProjectDetail = () => {
                     </div>
                 </section>
 
-                <div className="flex gap-3">
-                    <i
-                        className="fa-solid fa-pencil"
-                        onClick={() => {
-                            setModalType("edit");
-                            setOpen(true);
-                        }}
-                    ></i>
-                    <i
-                        className="fa-solid fa-trash-can"
+                <div className="fixed bottom-6 right-6 flex flex-col items-center gap-3 z-50">
+                    <button
+                        className="w-12 h-12 rounded-full bg-neutral-400 hover:bg-neutral-500 flex items-center justify-center shadow-lg"
                         onClick={() => {
                             setModalType("delete");
                             setOpen(true);
                         }}
-                    ></i>
+                        title="Delete project"
+                    >
+                        <i className="fa-solid fa-trash-can text-white"></i>
+                    </button>
+                    <button
+                        className="w-12 h-12 rounded-full bg-neutral-800 hover:bg-neutral-900 flex items-center justify-center shadow-lg"
+                        onClick={() => {
+                            setModalType("edit");
+                            setOpen(true);
+                        }}
+                        title="Edit project"
+                    >
+                        <i className="fa-solid fa-pencil text-white text-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
