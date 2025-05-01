@@ -57,7 +57,7 @@ const SideNav = () => {
     };
 
     return (
-        <section className="px-2 py-0 h-full flex flex-col justify-between relative">
+        <section className="px-2 py-0 h-full flex flex-col justify-between relative overflow-visible">
             <div className="flex flex-col gap-5">
                 <div
                     className="flex gap-3 items-center cursor-pointer relative overflow-visible"
@@ -65,12 +65,13 @@ const SideNav = () => {
                 >
                     <img
                         src={logo}
-                        className="h-[150px] w-auto absolute left-1/2 -translate-x-1/2 top-[-30px]"
+                        alt="FableFrame logo"
+                        className="absolute top-[-20px] left-[60px] -translate-x-1/2 w-auto max-w-none h-[150px] max-h-none"
                     />
                 </div>
 
-                <div className="mt-[110px] px-2 text-center">
-                    <hr className="mt-2 mb-5" />
+                <div className="px-2 text-center">
+                    <hr className="mt-[120px] mb-5" />
 
                     <Link to={`/`}>
                         <p className="text-xs text-neutral-400 hover:underline cursor-pointer">
@@ -102,7 +103,7 @@ const SideNav = () => {
                                         <Link
                                             to={`/projects/${projectId}/characters/${character._id}`}
                                             key={character._id}
-                                            className="block hover:underline line-clamp-1 text-ellipsis text-xs"
+                                            className="block w-full truncate text-xs hover:underline"
                                         >
                                             {character.name}
                                         </Link>
