@@ -148,11 +148,11 @@ const SideNav = () => {
                     </div>
                 </div>
                 <div className="mb-4 px-2 flex flex-col  justify-center">
-                    <button className="cursor-pointer">
+                    {/* <button className="cursor-pointer">
                         <small className="hover:underline text-neutral-400">
                             ABOUT
                         </small>
-                    </button>
+                    </button> */}
                     <button
                         onClick={() => setLogoutModalOpen(true)}
                         className="hover:underline cursor-pointer"

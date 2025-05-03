@@ -30,7 +30,7 @@ const Login = () => {
             setUser({ email: formData.email, posts: [] });
 
             //navigate to dashboard
-            navigate("/dashboard");
+            navigate("/");
         } catch (error) {
             console.log(error);
             setError(error.message);
@@ -50,7 +50,6 @@ const Login = () => {
                     }
                     autoFocus
                 />
-                {formData.email}
                 <PasswordInput
                     label="Password"
                     placeholder="********"
@@ -59,13 +58,8 @@ const Login = () => {
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
-                {formData.password}
                 <div>
-                    <Button
-                        color="gray"
-                        className="w-full"
-                        onClick={handleLogin}
-                    >
+                    <Button color="gray" className="w-full" type="submit">
                         Login
                     </Button>
                     {error ? (

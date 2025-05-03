@@ -44,3 +44,7 @@
 #root {
     @apply bg-neutral-100;
 }
+
+.mantine-Modal-title {
+    @apply font-bold;
+}

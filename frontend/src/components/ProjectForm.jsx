@@ -18,6 +18,7 @@ const ProjectForm = ({ initialData, closeModal, onUpdate }) => {
 
     useEffect(() => {
         if (initialData) {
+            console.log(initialData);
             setProjectData({
                 name: initialData.name || "",
                 tags: initialData.tags || [],
@@ -31,7 +32,6 @@ const ProjectForm = ({ initialData, closeModal, onUpdate }) => {
 
         try {
             if (initialData) {
-                console.log("update project", projectData);
                 await updateProject(initialData._id, projectData);
             } else {
                 await createProject(projectData);
@@ -80,6 +80,7 @@ const ProjectForm = ({ initialData, closeModal, onUpdate }) => {
             />
             <Textarea
                 label="Description"
+                value={projectData.description}
                 onChange={(e) =>
                     setProjectData({
                         ...projectData,

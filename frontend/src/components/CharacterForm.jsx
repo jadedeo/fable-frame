@@ -163,7 +163,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                     }
                 />
             )}
-            <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-10">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 my-10">
                 <Modal
                     opened={open}
                     onClose={() => setOpen(false)}

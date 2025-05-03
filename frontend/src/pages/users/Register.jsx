@@ -74,11 +74,7 @@ const Register = () => {
                     }
                 />
                 <div>
-                    <Button
-                        color="gray"
-                        className="w-full"
-                        onClick={handleRegister}
-                    >
+                    <Button color="gray" className="w-full" type="submit">
                         Register
                     </Button>
                     {error ? (
