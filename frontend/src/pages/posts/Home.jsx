@@ -1,15 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import { getPosts } from "../../controllers/postsController";
-import {
-    getProjects,
-    createProject,
-} from "../../controllers/projectsController";
-import { PostContext } from "../../contexts/PostContext";
-import Post from "../../components/Post";
+import { useEffect, useState } from "react";
+
+import { getProjects } from "../../controllers/projectsController";
 import ProjectCard from "../../components/ProjectCard";
 import { Link } from "react-router-dom";
 import Heading from "../../components/Heading";
-import { Modal, Button } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import ProjectForm from "../../components/ProjectForm";
 
 const Home = () => {
@@ -68,12 +63,12 @@ const Home = () => {
 
             <div className="mt-10 flex flex-col gap-10">
                 {loading && (
-                    <div className="w-full flex items-center justify-center">
-                        <i className="fa-solid fa-spinner animate-spin text-3xl text-center block"></i>
+                    <div className="w-full flex items-center justify-center mt-[200px]">
+                        <i className="fa-solid fa-spinner text-neutral-500 animate-spin text-3xl text-center block"></i>
                     </div>
                 )}
 
-                {projects && (
+                {projects && !loading && (
                     <section className="grid auto-rows-[1fr] grid-cols-1 md:grid-cols-2 gap-5">
                         {projects.map((project) => (
                             <Link

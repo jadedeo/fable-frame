@@ -94,18 +94,18 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
 
         try {
             if (isEditing) {
-                console.log("SAVE EDIT");
+                // console.log("SAVE EDIT");
                 const data = await updateCharacter(
                     projectId,
                     character._id,
                     formData
                 ); // pass FormData
-                console.log("character updated", data);
+                // console.log("character updated", data);
                 if (onDoneEditing) onDoneEditing();
             } else {
-                console.log("NEW");
+                // console.log("NEW");
                 const data = await createCharacter(projectId, formData); // pass FormData
-                console.log("character created", data.character._id);
+                // console.log("character created", data.character._id);
                 navigate(
                     `/projects/${projectId}/characters/${data.character._id}`
                 );

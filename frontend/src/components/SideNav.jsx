@@ -48,7 +48,7 @@ const SideNav = () => {
         // setLogoutModalOpen(true);
         // if (confirm("Confirm Logout?")) {
         //     console.log("logout");
-        setUser({ email: null, posts: [] });
+        setUser({ email: null });
         localStorage.removeItem("email");
         localStorage.removeItem("token");
         navigate("/");

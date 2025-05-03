@@ -78,8 +78,8 @@ const CharacterDetail = () => {
 
             <div className="flex flex-col">
                 {loading && (
-                    <div className="w-full flex items-center justify-center">
-                        <i className="fa-solid fa-spinner animate-spin text-3xl text-center block"></i>
+                    <div className="w-full flex items-center justify-center mt-[200px]">
+                        <i className="fa-solid fa-spinner text-neutral-500 animate-spin text-3xl text-center block"></i>
                     </div>
                 )}
 
@@ -328,11 +328,14 @@ const CharacterDetail = () => {
                 <div className="flex justify-end gap-3 mt-5">
                     <Button
                         variant="outline"
+                        color="gray"
                         onClick={() => setDeleteModalOpen(false)}
                     >
                         Cancel
                     </Button>
-                    <Button onClick={handleDeleteCharacter}>Delete</Button>
+                    <Button color="gray" onClick={handleDeleteCharacter}>
+                        Delete
+                    </Button>
                 </div>
             </Modal>
         </div>

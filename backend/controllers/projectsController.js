@@ -9,7 +9,7 @@ const getUserProjects = async (req, res) => {
     const user = await User.findById(req.user._id);
 
     try {
-        // can use find () with params, like find(title: "hello") to only get posts that match criteria
+        // can use find () with params, like find(title: "hello") to only get projects that match criteria
         const userProjects = await Project.find({ user: user._id }).sort({
             createdAt: "desc",
         });

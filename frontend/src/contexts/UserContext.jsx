@@ -5,8 +5,6 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState({
         email: localStorage.getItem("email"),
-        posts: [],
-        projects: [],
     });
 
     return (

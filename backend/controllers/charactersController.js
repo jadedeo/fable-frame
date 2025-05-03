@@ -10,7 +10,7 @@ const getProjectCharacters = async (req, res) => {
     const { projectId } = req.params;
 
     try {
-        // can use find () with params, like find(title: "hello") to only get posts that match criteria
+        // can use find () with params, like find(title: "hello") to only get characters that match criteria
         const projectCharacters = await Character.find({
             user: user._id,
             project: projectId,
@@ -125,9 +125,9 @@ const getCharacter = async (req, res) => {
 // };
 
 const createCharacter = async (req, res) => {
-    console.log("🛬 Incoming createCharacter request");
-    console.log("Body keys:", Object.keys(req.body));
-    console.log("File:", req.file?.filename || "No file uploaded");
+    // console.log("incoming createCharacter request");
+    // console.log("Body keys:", Object.keys(req.body));
+    // console.log("File:", req.file?.filename || "No file uploaded");
 
     try {
         const parsedData = JSON.parse(req.body.characterData);
@@ -144,7 +144,7 @@ const createCharacter = async (req, res) => {
 
         res.status(201).json({ character: savedCharacter });
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         res.status(500).json({ error: "Failed to create character" });
     }
 };
@@ -172,7 +172,7 @@ const updateCharacter = async (req, res) => {
 
         res.status(200).json({ character: updatedCharacter });
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         res.status(500).json({ error: "Failed to update character" });
     }
 };
@@ -192,7 +192,7 @@ const deleteCharacter = async (req, res) => {
 
     // check user owns character
     const user = await User.findById(req.user._id);
-    console.log(character.user);
+    // console.log(character.user);
     if (!character.user.equals(user._id)) {
         return res.status(401).json({ error: "Not authorized" });
     }

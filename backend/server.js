@@ -1,5 +1,4 @@
 import express from "express";
-import { postsRoutes } from "./routes/postsRoutes.js";
 import { usersRoutes } from "./routes/usersRoutes.js";
 import { projectsRoutes } from "./routes/projectsRoutes.js";
 import mongoose from "mongoose";
@@ -23,7 +22,6 @@ app.use(express.json());
 //    step 2: controller to handle router
 
 //declare routes for api
-app.use("/api/posts", postsRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/projects", projectsRoutes);
 app.use("/uploads", express.static("uploads"));

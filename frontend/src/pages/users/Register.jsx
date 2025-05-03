@@ -32,10 +32,10 @@ const Register = () => {
                 formData.passwordConfirm
             );
             // update user state
-            setUser({ email: formData.email, posts: [] });
+            setUser({ email: formData.email });
 
-            //navigate to dashboard
-            navigate("/dashboard");
+            //navigate to home/projects page
+            navigate("/");
         } catch (error) {
             setError(error.message);
         }

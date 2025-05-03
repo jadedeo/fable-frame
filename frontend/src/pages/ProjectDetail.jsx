@@ -100,11 +100,12 @@ const ProjectDetail = () => {
                         <div className="flex justify-end gap-3 mt-5">
                             <Button
                                 variant="outline"
+                                color="gray"
                                 onClick={() => setOpen(false)}
                             >
                                 Cancel
                             </Button>
-                            <Button onClick={handleDeleteProject}>
+                            <Button color="gray" onClick={handleDeleteProject}>
                                 Delete
                             </Button>
                         </div>

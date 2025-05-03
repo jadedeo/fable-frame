@@ -27,9 +27,9 @@ const Login = () => {
             //login user
             await loginUser(formData.email, formData.password);
             // update user state
-            setUser({ email: formData.email, posts: [] });
+            setUser({ email: formData.email });
 
-            //navigate to dashboard
+            //navigate to home/projects page
             navigate("/");
         } catch (error) {
             console.log(error);

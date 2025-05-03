@@ -4,8 +4,6 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import UserProvider from "./contexts/UserContext.jsx";
-import PostProvider from "./contexts/PostContext.jsx";
-import ProjectProvider from "./contexts/ProjectContext.jsx";
 import { createTheme, MantineProvider } from "@mantine/core";
 
 const theme = createTheme({
@@ -15,13 +13,9 @@ const theme = createTheme({
 createRoot(document.getElementById("root")).render(
     <StrictMode>
         <MantineProvider theme={theme}>
-            <PostProvider>
-                <UserProvider>
-                    <ProjectProvider>
-                        <App />
-                    </ProjectProvider>
-                </UserProvider>
-            </PostProvider>
+            <UserProvider>
+                <App />
+            </UserProvider>
         </MantineProvider>
     </StrictMode>
 );
