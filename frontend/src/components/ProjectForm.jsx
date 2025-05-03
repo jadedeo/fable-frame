@@ -90,10 +90,12 @@ const ProjectForm = ({ initialData, closeModal, onUpdate }) => {
                 autosize
             />
             <div className="flex justify-end gap-2">
-                <Button variant="outline" onClick={closeModal}>
+                <Button variant="outline" color="gray" onClick={closeModal}>
                     Cancel
                 </Button>
-                <Button type="submit">Save</Button>
+                <Button type="submit" color="gray">
+                    Save
+                </Button>
             </div>
         </form>
     );

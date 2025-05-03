@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert";
 import { loginUser } from "../../controllers/usersController";
 import { UserContext } from "../../contexts/UserContext";
+import { TextInput, PasswordInput, Button } from "@mantine/core";
 
 const Login = () => {
     // use user context
@@ -37,31 +38,43 @@ const Login = () => {
     };
 
     return (
-        <section className="">
-            <h1 className="title">Log into your account.</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="input"
+        <section className="flex flex-col gap-5">
+            <h1 className="font-bold text-2xl">Log into your account.</h1>
+            <form onSubmit={handleLogin} className="flex flex-col gap-3">
+                <TextInput
+                    label="Email"
+                    placeholder="example@gmail.com"
                     value={formData.email}
                     onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                     }
                     autoFocus
                 />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="input"
+                {formData.email}
+                <PasswordInput
+                    label="Password"
+                    placeholder="********"
                     value={formData.password}
                     onChange={(e) =>
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
-                <button className="btn">Login</button>
+                {formData.password}
+                <div>
+                    <Button
+                        color="gray"
+                        className="w-full"
+                        onClick={handleLogin}
+                    >
+                        Login
+                    </Button>
+                    {error ? (
+                        <Alert msg={error} />
+                    ) : (
+                        <div className="h-[28px]"></div>
+                    )}
+                </div>
             </form>
-            {error && <Alert msg={error} />}
         </section>
     );
 };

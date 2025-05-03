@@ -14,7 +14,7 @@ const Layout = () => {
 
     //bg-[url(gradientBg.jpg)] bg-no-repeat bg-cover
     return (
-        <div className="p-10  h-screen w-screen max-w-screen-xl mx-auto">
+        <div className="p-10 h-screen w-screen max-w-screen-xl mx-auto">
             {/* IF USER LOGGED IN */}
             {user.email ? (
                 <div className="flex gap-8 h-full">

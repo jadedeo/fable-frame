@@ -101,8 +101,14 @@ const RelationshipForm = ({
             />
 
             <div className="flex justify-end gap-2">
-                <Button onClick={handleSubmit}>Save</Button>
-                <Button variant="outline" onClick={() => closeModal()}>
+                <Button onClick={handleSubmit} color="gray">
+                    Save
+                </Button>
+                <Button
+                    variant="outline"
+                    color="gray"
+                    onClick={() => closeModal()}
+                >
                     Cancel
                 </Button>
             </div>

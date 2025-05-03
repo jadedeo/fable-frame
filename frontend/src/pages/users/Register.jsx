@@ -5,6 +5,8 @@ import Alert from "../../components/Alert";
 import { registerUser } from "../../controllers/usersController";
 import { UserContext } from "../../contexts/UserContext";
 
+import { TextInput, PasswordInput, Button } from "@mantine/core";
+
 const Register = () => {
     const { user, setUser } = useContext(UserContext);
 
@@ -40,32 +42,29 @@ const Register = () => {
     };
 
     return (
-        <section className="">
-            <h1 className="title">Create a new account.</h1>
-            <form onSubmit={handleRegister}>
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="input"
+        <section className="flex flex-col gap-3">
+            <h1 className="font-bold text-2xl">Create a new account.</h1>
+            <form onSubmit={handleRegister} className="flex flex-col gap-3">
+                <TextInput
+                    label="Email"
+                    placeholder="example@gmail.com"
                     value={formData.email}
                     onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                     }
                     autoFocus
                 />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="input"
+                <PasswordInput
+                    label="Password"
+                    placeholder="********"
                     value={formData.password}
                     onChange={(e) =>
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
-                <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    className="input"
+                <PasswordInput
+                    label="Confirm Password"
+                    placeholder="********"
                     value={formData.passwordConfirm}
                     onChange={(e) =>
                         setFormData({
@@ -74,9 +73,21 @@ const Register = () => {
                         })
                     }
                 />
-                <button className="btn">Register</button>
+                <div>
+                    <Button
+                        color="gray"
+                        className="w-full"
+                        onClick={handleRegister}
+                    >
+                        Register
+                    </Button>
+                    {error ? (
+                        <Alert msg={error} />
+                    ) : (
+                        <div className="h-[28px]"></div>
+                    )}
+                </div>
             </form>
-            {error && <Alert msg={error} />}
         </section>
     );
 };
