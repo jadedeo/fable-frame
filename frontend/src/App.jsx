@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
-import Home from "./pages/posts/Home";
+import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import CharacterDetail from "./pages/CharacterDetail";
 
@@ -32,8 +32,8 @@ const App = () => {
                     {/* </Route> */}
 
                     {/* <Route element={<GuestRoutes />}> */}
-                    {/* <Route path="login" element={<Login />} /> */}
-                    {/* <Route path="register" element={<Register />} /> */}
+                    {/* <Route path="login" element={<LoginForm />} /> */}
+                    {/* <Route path="register" element={<RegisterForm />} /> */}
                     {/* </Route> */}
                 </Route>
             </Routes>

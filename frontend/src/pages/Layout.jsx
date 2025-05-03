@@ -3,7 +3,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import { UserContext } from "../contexts/UserContext";
 import AuthPage from "./AuthPage";
-import Home from "./posts/Home";
+import Home from "./Home";
 import SideNav from "../components/SideNav";
 
 const Layout = () => {

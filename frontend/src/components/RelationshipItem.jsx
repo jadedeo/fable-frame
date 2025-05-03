@@ -42,14 +42,6 @@ const RelationshipItem = ({
                             >
                                 Remove
                             </small>
-                            {/* <i
-                                className="fa-solid fa-pencil cursor-pointer"
-                                onClick={onEdit}
-                            ></i> */}
-                            {/* <i
-                                className="fa-solid fa-trash-can cursor-pointer"
-                                onClick={onDelete}
-                            ></i> */}
                         </div>
                     )}
                 </div>

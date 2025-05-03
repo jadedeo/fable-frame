@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { getProjects } from "../../controllers/projectsController";
-import ProjectCard from "../../components/ProjectCard";
+import { getProjects } from "../controllers/projectsController";
+import ProjectCard from "../components/ProjectCard";
 import { Link } from "react-router-dom";
-import Heading from "../../components/Heading";
+import Heading from "../components/Heading";
 import { Modal } from "@mantine/core";
-import ProjectForm from "../../components/ProjectForm";
+import ProjectForm from "../components/ProjectForm";
 
 const Home = () => {
     //project state

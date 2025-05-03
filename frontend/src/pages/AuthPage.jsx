@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Login from "./users/Login";
-import Register from "./users/Register";
+import LoginForm from "./users/LoginForm";
+import RegisterForm from "./users/RegisterForm";
 import { Button } from "@mantine/core";
 
 import logo from "../assets/fableframelogo.png";
@@ -19,7 +19,7 @@ const AuthPage = () => {
                 </div>
                 {showLoginForm ? (
                     <div className="flex flex-col gap-5 justify-center w-full">
-                        <Login />
+                        <LoginForm />
                         <small className="block w-full text-center">
                             Don't have an account yet?{" "}
                             <a
@@ -40,7 +40,7 @@ const AuthPage = () => {
 
                 {showSignupForm ? (
                     <div className="flex flex-col gap-5 justify-center w-full">
-                        <Register />
+                        <RegisterForm />
                         <small className="block w-full text-center">
                             Already have an account?{" "}
                             <a

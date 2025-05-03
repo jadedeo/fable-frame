@@ -10,7 +10,7 @@ import ProjectForm from "../components/ProjectForm";
 import { Modal, Button, Badge } from "@mantine/core";
 
 import { useState, useEffect } from "react";
-import Character from "../components/Character";
+import CharacterCard from "../components/CharacterCard";
 import Heading from "../components/Heading";
 
 const ProjectDetail = () => {
@@ -155,7 +155,7 @@ const ProjectDetail = () => {
                                     key={character._id}
                                     to={`/projects/${projectId}/characters/${character._id}`}
                                 >
-                                    <Character
+                                    <CharacterCard
                                         key={character._id}
                                         character={character}
                                     />
