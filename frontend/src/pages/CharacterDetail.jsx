@@ -1,4 +1,4 @@
-import Heading from "../components/Heading";
+import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {

@@ -1,4 +1,4 @@
-const Heading = ({ title, subtitle }) => {
+const Header = ({ title, subtitle }) => {
     return (
         <section className="card bg-neutral-500 h-[15%] px-5 flex items-center">
             <div>
@@ -9,4 +9,4 @@ const Heading = ({ title, subtitle }) => {
     );
 };
 
-export default Heading;
+export default Header;

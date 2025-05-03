@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import LoginForm from "./users/LoginForm";
-import RegisterForm from "./users/RegisterForm";
+import LoginForm from "../components/LoginForm";
+import RegisterForm from "../components/RegisterForm";
 import { Button } from "@mantine/core";
 
 import logo from "../assets/fableframelogo.png";

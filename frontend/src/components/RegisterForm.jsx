@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Alert from "../../components/Alert";
-import { loginUser } from "../../controllers/usersController";
-import { UserContext } from "../../contexts/UserContext";
+import Alert from "./Alert";
+import { registerUser } from "../controllers/usersController";
+import { UserContext } from "../contexts/UserContext";
+
 import { TextInput, PasswordInput, Button } from "@mantine/core";
 
-const Login = () => {
-    // use user context
-    const { setUser } = useContext(UserContext);
+const Register = () => {
+    const { user, setUser } = useContext(UserContext);
 
     // use navigate hoook
     const navigate = useNavigate();
@@ -19,28 +19,32 @@ const Login = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
+        passwordConfirm: "",
     });
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            //login user
-            await loginUser(formData.email, formData.password);
+            //register user
+            await registerUser(
+                formData.email,
+                formData.password,
+                formData.passwordConfirm
+            );
             // update user state
             setUser({ email: formData.email });
 
             //navigate to home/projects page
             navigate("/");
         } catch (error) {
-            console.log(error);
             setError(error.message);
         }
     };
 
     return (
-        <section className="flex flex-col gap-5">
-            <h1 className="font-bold text-2xl">Log into your account.</h1>
-            <form onSubmit={handleLogin} className="flex flex-col gap-3">
+        <section className="flex flex-col gap-3">
+            <h1 className="font-bold text-2xl">Create a new account.</h1>
+            <form onSubmit={handleRegister} className="flex flex-col gap-3">
                 <TextInput
                     label="Email"
                     placeholder="example@gmail.com"
@@ -58,9 +62,20 @@ const Login = () => {
                         setFormData({ ...formData, password: e.target.value })
                     }
                 />
+                <PasswordInput
+                    label="Confirm Password"
+                    placeholder="********"
+                    value={formData.passwordConfirm}
+                    onChange={(e) =>
+                        setFormData({
+                            ...formData,
+                            passwordConfirm: e.target.value,
+                        })
+                    }
+                />
                 <div>
                     <Button color="gray" className="w-full" type="submit">
-                        Login
+                        Register
                     </Button>
                     {error ? (
                         <Alert msg={error} />
@@ -73,4 +88,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

@@ -19,7 +19,7 @@ import {
     updateCharacter,
 } from "../controllers/charactersController";
 import { useParams, useNavigate } from "react-router-dom";
-import Heading from "./Heading";
+import Header from "./Header";
 
 const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
     useEffect(() => {
@@ -155,7 +155,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
     return (
         <>
             {isEditing && (
-                <Heading
+                <Header
                     title={
                         isEditing
                             ? `Editing ${character.name}'s Character Profile`

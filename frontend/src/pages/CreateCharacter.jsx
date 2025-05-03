@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import CharacterForm from "../components/CharacterForm";
-import Heading from "../components/Heading";
+import Header from "../components/Header";
 
 const CreateCharacter = () => {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ const CreateCharacter = () => {
     };
     return (
         <div className="h-full overflow-scroll">
-            <Heading title={"Create New Character Profile"} />
+            <Header title={"Create New Character Profile"} />
             <CharacterForm onDoneEditing={onDoneEditing} />
         </div>
     );

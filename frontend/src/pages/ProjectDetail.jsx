@@ -11,7 +11,7 @@ import { Modal, Button, Badge } from "@mantine/core";
 
 import { useState, useEffect } from "react";
 import CharacterCard from "../components/CharacterCard";
-import Heading from "../components/Heading";
+import Header from "../components/Header";
 
 const ProjectDetail = () => {
     const { projectId } = useParams();
@@ -113,7 +113,7 @@ const ProjectDetail = () => {
                 )}
             </Modal>
 
-            <Heading title={project.name} />
+            <Header title={project.name} />
 
             <div className="mt-5 flex flex-col gap-5">
                 <section className="p-5 flex flex-col gap-5">
