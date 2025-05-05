@@ -1,4 +1,4 @@
-import { Badge } from "@mantine/core";
+import { Badge, Pill } from "@mantine/core";
 
 const ProjectCard = ({ project }) => {
     return (

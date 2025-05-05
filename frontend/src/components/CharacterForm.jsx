@@ -324,6 +324,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                                 goal: e.currentTarget.value,
                             })
                         }
+                        autosize
                     />
 
                     <Textarea
@@ -461,6 +462,7 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                                 habitsMannerisms: e.currentTarget.value,
                             })
                         }
+                        autosize
                     />
 
                     <MultiSelectCreatable
@@ -493,28 +495,31 @@ const CharacterForm = ({ character, isEditing, onDoneEditing }) => {
                             }}
                         ></i>
                     </div>
-                    {characterData.relationships?.length > 0 &&
-                        characterData.relationships.map(
-                            (relationship, index) => {
-                                return (
-                                    <RelationshipItem
-                                        key={index}
-                                        relationship={relationship}
-                                        onEdit={() => {
-                                            setEditingItem(relationship);
-                                            setModalType("relationship");
-                                            setOpen(true);
-                                        }}
-                                        onDelete={() =>
-                                            handleDelete(
-                                                "relationship",
-                                                relationship.id
-                                            )
-                                        }
-                                    />
-                                );
-                            }
-                        )}
+                    {characterData.relationships?.length > 0 && (
+                        <div>
+                            {characterData.relationships.map(
+                                (relationship, index) => {
+                                    return (
+                                        <RelationshipItem
+                                            key={index}
+                                            relationship={relationship}
+                                            onEdit={() => {
+                                                setEditingItem(relationship);
+                                                setModalType("relationship");
+                                                setOpen(true);
+                                            }}
+                                            onDelete={() =>
+                                                handleDelete(
+                                                    "relationship",
+                                                    relationship.id
+                                                )
+                                            }
+                                        />
+                                    );
+                                }
+                            )}
+                        </div>
+                    )}
                 </section>
 
                 <section className="card w-full flex flex-col gap-5">

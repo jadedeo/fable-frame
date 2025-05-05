@@ -7,7 +7,7 @@ const RelationshipItem = ({
 }) => {
     return (
         <div
-            className={`flex   p-5 ${
+            className={`flex p-3 ${
                 !editable ? "card" : "hover:bg-neutral-100"
             }`}
         >

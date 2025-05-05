@@ -1,4 +1,4 @@
-import { Pill } from "@mantine/core";
+import { Pill, Badge } from "@mantine/core";
 
 const Character = ({ character }) => {
     return (
@@ -20,7 +20,11 @@ const Character = ({ character }) => {
                 {character.role && (
                     <div className="flex gap-1">
                         {character.role.map((role, index) => {
-                            return <Pill key={index}>{role}</Pill>;
+                            return (
+                                <Badge key={index} color="gray">
+                                    {role}
+                                </Badge>
+                            );
                         })}
                     </div>
                 )}
